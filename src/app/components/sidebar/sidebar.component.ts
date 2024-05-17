@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FolderService } from 'src/core/services/folder.service';
+import { ObjectType } from 'src/core/ultils/constaints';
 
 // Mở rộng giao diện RouteInfo để hỗ trợ submenu
 declare interface RouteInfo {
   id : number;
+  objectType? : number;
   path: string;
   title: string;
   icon: string;
@@ -14,7 +17,9 @@ declare interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-  { id: 2,path: '/note', title: 'Note',  icon: 'ni-tv-2 text-primary', class: 'formz',hasSubmenu:false, parentid : null},
+  { id: 2, objectType: ObjectType.folder,path: '/note', title: 'Note',  icon: 'ni-tv-2 text-primary', class: 'formz',hasSubmenu:false, parentid : null},
+
+
   { id: 3, path: '/icons', title: 'Club ',  icon:'ni-planet text-blue', class: 'formz' ,hasSubmenu:false, parentid : null},
   { id: 4, path: '/maps', title: 'Accomodation',  icon:'ni-pin-3 text-orange', class: 'formz' ,hasSubmenu:false, parentid : null},
   { id: 5, path: '', title: 'Restaurant',  icon:'ni-single-02 text-yellow', class: 'formz' ,hasSubmenu:false, parentid : null},
@@ -37,9 +42,13 @@ export class SidebarComponent implements OnInit {
   public menuItems: any[];
   public isCollapsed = true;
   boldIconUp = true;
-  constructor(private router: Router) { }
+  public listFolders : Array<any> = [];
+  constructor(private router: Router,
+  private serviceFolder : FolderService
+  ) { }
 
   ngOnInit() {
+    this.loadService();
     this.menuItems = ROUTES.filter(menuItem => menuItem);
     this.router.events.subscribe((event) => {
       this.isCollapsed = false;
@@ -47,6 +56,12 @@ export class SidebarComponent implements OnInit {
   }
   toggleIconStyle() {
     this.boldIconUp = !this.boldIconUp;
+  }
+  loadService(){
+    this.serviceFolder.getAllFolder().subscribe((data) => {
+        this.listFolders = data.data;
+        console.log("listFolders",this.listFolders)
+    });
   }
   toggleMenuExpansion(menuItem: RouteInfo) {
     menuItem.isExpanded = !menuItem.isExpanded;
