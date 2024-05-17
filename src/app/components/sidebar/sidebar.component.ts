@@ -14,8 +14,8 @@ declare interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-  { id :2,path: '', title: 'Note',  icon: 'ni-tv-2 text-primary', class: 'formz',hasSubmenu:true, parentid : null},
-  { id: 3, path: '/icons', title: 'Club ',  icon:'ni-planet text-blue', class: 'formz' ,hasSubmenu:false, parentid : 2},
+  { id: 2,path: '/note', title: 'Note',  icon: 'ni-tv-2 text-primary', class: 'formz',hasSubmenu:false, parentid : null},
+  { id: 3, path: '/icons', title: 'Club ',  icon:'ni-planet text-blue', class: 'formz' ,hasSubmenu:false, parentid : null},
   { id: 4, path: '/maps', title: 'Accomodation',  icon:'ni-pin-3 text-orange', class: 'formz' ,hasSubmenu:false, parentid : null},
   { id: 5, path: '', title: 'Restaurant',  icon:'ni-single-02 text-yellow', class: 'formz' ,hasSubmenu:false, parentid : null},
 //   { id: 6,path: '', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' ,hasSubmenu:true, parentid : 5},
