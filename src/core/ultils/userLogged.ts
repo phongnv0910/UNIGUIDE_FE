@@ -1,5 +1,4 @@
 export class UserLogged {
-    [x: string]: any;
     private readonly TOKENKEY: string = 'token';
 
     constructor() {
@@ -11,6 +10,7 @@ export class UserLogged {
       setCurrentUser(
         token: string,
       ): void {
+        debugger
         this.setCookie(this.TOKENKEY, token);
       }
       saveToken(token: string) {

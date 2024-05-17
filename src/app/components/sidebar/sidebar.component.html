@@ -25,7 +25,44 @@
       </form> -->
       <!-- Navigation -->
       <ul class="navbar-nav">
-        <ng-container *ngFor="let menuItem of menuItems">
+        <li class="nav-item">
+          <a routerLinkActive="active" [routerLink]="['/dashboard']" class="nav-link">
+            <i class="ni" [ngClass]="{'ni-bold-down': isExpanded, 'ni-bold-right': !isExpanded}" (click)="toggleMenuExpansion()"></i> Note 
+            <i class="ni ni-fat-add" style="float: right;"></i>
+          </a>
+          <ul *ngIf="isExpanded"> <!-- Nested ul for submenu items -->
+            <ng-container *ngFor="let menuItem of menuItems">
+              <li class="{{menuItem.class}} nav-item" *ngIf="menuItem.parentid === 2">
+                <div class="menu-item-wrapper">
+                  <a routerLinkActive="active" [routerLink]="[menuItem.path]" class="nav-link" (click)="toggleSubMenuExpansions(menuItem)">
+                    <i class="ni" [ngClass]="{'ni-bold-down': menuItem.isExpanded, 'ni-bold-right': !menuItem.isExpanded}"></i>
+                    <i class="ni {{menuItem.icon}}"></i>
+                    <span>{{menuItem.title}}</span>
+                  </a>
+                  <i class="ni ni-fat-add"></i>
+                  
+                </div>
+              </li>
+            </ng-container>
+          </ul>
+          
+        </li>
+        <li class="nav-item">
+          <a routerLinkActive="active" [routerLink]="['/dashboard']" class="nav-link">
+            <i class="ni ni-pin-3 text-orange"></i> Accommodation
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLinkActive="active" [routerLink]="['/dashboard']" class="nav-link">
+            <i class="ni ni-single-02 text-yellow"></i> Restaurant
+          </a>
+        </li>
+      </ul>
+      
+      
+
+
+        <!-- <ng-container *ngFor="let menuItem of menuItems">
           <li class="{{menuItem.class}} nav-item" *ngIf="menuItem.parentid === null">
             <a routerLinkActive="active" [routerLink]="[menuItem.path]" class="nav-link"
                *ngIf="menuItem.hasSubmenu; else noSubmenu">
@@ -47,11 +84,11 @@
                     {{submenuItem.title}}
                   </a>
                 </li>
-              </ng-container>
+              </ng-container> 
             </ul>
           </li>
-        </ng-container>
-      </ul>
+        </ng-container>-->
+      
       
       
         

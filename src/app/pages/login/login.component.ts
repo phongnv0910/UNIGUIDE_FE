@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { LoginService } from 'src/core/services/login/login.service';
 import { ToastrService } from 'ngx-toastr';
+import { UserLogged } from 'src/core/ultils/userLogged';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -48,6 +49,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       console.log("res in login",res);
       if(res.data == ""){
         this.toastService.error("Email or Password is not correct!")
+      }
+      else{
+        let userLogged: UserLogged = new UserLogged();
+        userLogged.setCurrentUser(res.data);
       }
     })
   }

@@ -22,3 +22,14 @@
     font-size: 15px;
     font-weight: 900;
 }
+.ni-fat-add::before {
+    float: right;
+}
+.menu-item-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  
+  .menu-item-wrapper .ni-fat-add {
+    margin-right: auto;
+  }
