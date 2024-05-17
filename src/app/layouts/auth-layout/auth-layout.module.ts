@@ -9,6 +9,7 @@ import { LoginComponent } from '../../pages/login/login.component';
 import { RegisterComponent } from '../../pages/register/register.component';
 import { DropDownListAllModule } from '@syncfusion/ej2-angular-dropdowns';
 import { TextBoxAllModule } from '@syncfusion/ej2-angular-inputs';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   imports: [
     CommonModule,
@@ -16,6 +17,7 @@ import { TextBoxAllModule } from '@syncfusion/ej2-angular-inputs';
     FormsModule,
     ReactiveFormsModule,
      NgbModule,
+     ToastrModule,
      DropDownListAllModule,
      TextBoxAllModule
   ],

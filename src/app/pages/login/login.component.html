@@ -77,6 +77,11 @@
                 "
                 >Password is required</small
               >
+              <small
+              class="formz text-danger fw-600"
+              *ngIf="checking"
+              >{{infoLoginError}}</small
+            >
             </div>
             <div class="custom-control custom-control-alternative custom-checkbox">
                 <input class="custom-control-input" id="customCheckLogin" type="checkbox">

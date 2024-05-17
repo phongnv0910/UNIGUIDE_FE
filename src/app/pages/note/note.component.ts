@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NoteService } from 'src/core/services/note/note.service'; 
+import { NoteService } from 'src/core/services/note/note.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

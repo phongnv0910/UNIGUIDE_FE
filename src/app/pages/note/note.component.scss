@@ -23,5 +23,30 @@
       border: none;
       cursor: pointer;
     }
+    .custom-editor {
+      height: 300px;
+    }
+    
+  }
+  .note-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .note-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .custom-editor {
+    height: 300px;
+  }
+  
+  .custom-editor .ql-editor {
+    min-height: 200px;
+  }
+  
+  .custom-editor .ql-toolbar {
+    border: none;
   }
   

@@ -21,6 +21,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   public form: UntypedFormGroup;
   public email: UntypedFormControl;
   public password: UntypedFormControl;
+  public checking = false;
+  public infoLoginError : String ="Email or Password is not correct!";
   constructor(
     router: Router,
     fb: UntypedFormBuilder,
@@ -37,18 +39,19 @@ export class LoginComponent implements OnInit, OnDestroy {
   });
 
   this.email = this.form.controls['email'] as UntypedFormControl;
-  this.password = this.form.controls['password'] as UntypedFormControl;}
-
+  this.password = this.form.controls['password'] as UntypedFormControl;}  
+  
   ngOnInit() {
+    console.log("email",this.email);
+    console.log("password",this.password);
   }
   ngOnDestroy() {
   }
   public onSubmit(values: any): void {
-    console.log("values",values)
     this.loginService.login(values).subscribe((res) => {
-      console.log("res in login",res);
+      console.log("res in login",res.data);
       if(res.data == ""){
-        this.toastService.error("Email or Password is not correct!")
+        this.checking = true;
       }
       else{
         let userLogged: UserLogged = new UserLogged();
