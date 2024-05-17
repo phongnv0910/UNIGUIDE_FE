@@ -10,6 +10,17 @@ import { ToastrService } from 'ngx-toastr';
 export class NoteComponent {
   noteContent: string = '';
 
+  editorConfig = {
+    toolbar: [
+      ['bold', 'italic', 'underline'],
+      [{ 'header': 1 }, { 'header': 2 }],
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+      [{ 'font': [] }],
+      [{ 'align': [] }],
+      ['clean']
+    ]
+  };
+
   constructor(
     private noteService: NoteService,
     private toastService: ToastrService
