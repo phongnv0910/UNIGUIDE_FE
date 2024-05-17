@@ -8,6 +8,7 @@ import {
   UntypedFormControl,
 } from '@angular/forms';
 import { LoginService } from 'src/core/services/login/login.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     router: Router,
     fb: UntypedFormBuilder,
-    private readonly loginService : LoginService
+    private readonly loginService : LoginService,
+    private toastService : ToastrService
   ) { 
   //   setTimeout(() => {
   //   jQuery('#videoCompressorModal').modal('hide');
@@ -43,7 +45,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   public onSubmit(values: any): void {
     console.log("values",values)
     this.loginService.login(values).subscribe((res) => {
-      console.log("res",res)
+      console.log("res in login",res);
+      if(res.data == ""){
+        this.toastService.error("Email or Password is not correct!")
+      }
     })
   }
 
