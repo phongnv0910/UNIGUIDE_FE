@@ -14,15 +14,9 @@ export class LoginService extends ApiService{
     this.jsonConvert = new JsonConvert();
    }
 
-   login(formData: any) : Observable<any>{
-      let url =  '/Account/Auth';
-      return super.postEntity(url, formData).pipe(
-        catchError((err) => throwError(() => new Error(err))),
-        map((res) => {
-          console.log('res', res);
-          return res;
-        
-        })
-      );
-   }
+   login(formData: any): Observable<any> {
+    let url = '/Account/Auth';
+    return super.postEntity(url, formData).pipe()
+ 
+  }
 }

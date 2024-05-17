@@ -1,5 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy,ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+import { EmailValidators } from 'ngx-validators'
 import {
   UntypedFormGroup,
   UntypedFormBuilder,
@@ -7,10 +8,12 @@ import {
   UntypedFormControl,
 } from '@angular/forms';
 import { LoginService } from 'src/core/services/login/login.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent implements OnInit, OnDestroy {
   public router: Router;
@@ -20,18 +23,16 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     router: Router,
     fb: UntypedFormBuilder,
-    private readonly loginService : LoginService
+    private readonly loginService : LoginService,
+    private toastService : ToastrService
   ) { 
   //   setTimeout(() => {
   //   jQuery('#videoCompressorModal').modal('hide');
   // }, 200);
   this.router = router;
   this.form = fb.group({
-    email: ['', Validators.compose([Validators.required])],
-    password: [
-      '',
-      Validators.compose([Validators.required, Validators.minLength(6)]),
-    ],
+    'email': ['', Validators.compose([Validators.required, EmailValidators.normal])],
+    'password': ['', Validators.compose([Validators.required, Validators.minLength(6)])]
   });
 
   this.email = this.form.controls['email'] as UntypedFormControl;
@@ -44,7 +45,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   public onSubmit(values: any): void {
     console.log("values",values)
     this.loginService.login(values).subscribe((res) => {
-      console.log("res",res)
+      console.log("res in login",res);
+      if(res.data == ""){
+        this.toastService.error("Email or Password is not correct!")
+      }
     })
   }
 
