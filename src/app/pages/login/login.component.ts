@@ -1,5 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy,ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+import { EmailValidators } from 'ngx-validators'
 import {
   UntypedFormGroup,
   UntypedFormBuilder,
@@ -10,7 +11,8 @@ import { LoginService } from 'src/core/services/login/login.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent implements OnInit, OnDestroy {
   public router: Router;
@@ -27,11 +29,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   // }, 200);
   this.router = router;
   this.form = fb.group({
-    email: ['', Validators.compose([Validators.required])],
-    password: [
-      '',
-      Validators.compose([Validators.required, Validators.minLength(6)]),
-    ],
+    'email': ['', Validators.compose([Validators.required, EmailValidators.normal])],
+    'password': ['', Validators.compose([Validators.required, Validators.minLength(6)])]
   });
 
   this.email = this.form.controls['email'] as UntypedFormControl;

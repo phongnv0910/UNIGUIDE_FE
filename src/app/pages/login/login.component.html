@@ -49,7 +49,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
-                    <input [formControl]="email" class="form-control formz validation-field" placeholder="Email" type="email">
+                    <input [formControl]="email" class="form-control formz validation-field" placeholder="Email" type="text">
                    
                 </div>
                 <small
@@ -60,6 +60,7 @@
                 "
                 >Email is required</small
               >
+              <small class="formz fw-600 text-danger" *ngIf="form.get('email')!.touched && form.get('email')!.hasError('normalEmailRule')">Invalid email address</small>
             </div>
             <div class="form-group mb-3"> 
                 <div class="input-group input-group-alternative">
