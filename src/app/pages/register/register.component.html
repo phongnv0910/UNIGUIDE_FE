@@ -1,0 +1,145 @@
+<div class="header py-7 py-lg-8">
+  <!-- <div class="container"> -->
+    <!-- <div class="header-body text-center mb-7">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-6">
+          <h1 class="text-white">Welcome!</h1>
+          <p class="text-lead text-light">Use these awesome forms to login or create new account in your project for free.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="separator separator-bottom separator-skew zindex-100">
+    <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+    </svg> -->
+  <!-- </div> -->
+</div>
+<!-- Page content -->
+
+<div class="container mt--8 pb-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-5 col-md-7">
+      <div class="card bg-secondary shadow border-0">
+
+        <div class="card-header bg-transparent pb-5">
+          <p class="title">Give life to your ideas.</p>
+          <p class="title-child" style="margin-top:-25px">Register with your account</p>
+        <!-- <div class="text-muted text-center mt-2 mb-3"><small>Sign in with</small></div> -->
+          <!-- <div class="btn-wrapper text-center"> -->
+            <!-- <a href="javascript:void(0)" class="btn btn-neutral btn-icon">
+              <span class="btn-inner--icon"><img src="../assets/img/icons/common/github.svg"></span>
+              <span class="btn-inner--text">Github</span>
+            </a>
+            <a href="javascript:void(0)" class="btn btn-neutral btn-icon">
+              <span class="btn-inner--icon"><img src="../assets/img/icons/common/google.svg"></span>
+              <span class="btn-inner--text">Google</span>
+            </a> -->
+          <!-- </div> -->
+        </div>
+        <div class="card-body px-lg-5 py-lg-5">
+          <!-- <div class="text-center text-muted mb-4">
+            <small>Or sign in with credentials</small>
+          </div> -->
+          <form role="form" style="margin-top:-40px">
+            <div class="form-group mb-3">
+              <div class="input-group input-group-alternative">
+                 
+                  <input class="form-control formz" placeholder="First Name" type="text">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ni ni-single-02"></i></span>
+                </div>
+              </div>
+          </div>
+          <div class="form-group mb-3">
+            <div class="input-group input-group-alternative">
+                
+                <!-- <ejs-textbox placeholder="Last Name" floatLabelType="Never" cssClass="e-outline" class=></ejs-textbox> -->
+                <input class="form-control formz" placeholder="Last Name" type="text">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-badge"></i></span>
+              </div>
+            </div>
+        </div>
+
+            <div class="form-group mb-3">
+              <ejs-dropdownlist
+              cssClass="e-outline"
+                placeholder="University"
+                [dataSource]="listUni"
+                (change)="onUniversityChange($event)"
+                [fields]="fieldUni">
+              </ejs-dropdownlist>
+          </div>
+            <div class="form-group mb-3" *ngIf="selectedUniversity">
+               <ejs-dropdownlist
+              cssClass="e-outline"
+                placeholder="Major"
+                [dataSource]="listMajor"
+                (change)="onMajorChange($event)"
+                [fields]="fieldMajor">
+              </ejs-dropdownlist>
+            </div>
+            <div class="form-group mb-3" *ngIf="selectedMajor">
+              <ejs-dropdownlist
+             cssClass="e-outline"
+               placeholder="Semester"
+               [dataSource]="listSemester"
+               [fields]="fieldSemester">
+             </ejs-dropdownlist>
+           </div>
+
+            <div class="form-group mb-3">
+                <div class="input-group input-group-alternative">
+                    
+                    <input class="form-control formz" placeholder="Email" type="email">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                  </div>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <div class="input-group input-group-alternative">
+                    
+                    <input class="form-control formz" placeholder="Password" type="password" (change)="onPassChange($event)">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                  </div>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+              <div class="input-group input-group-alternative">
+                 
+                  <input class="form-control formz" placeholder="Re-Password" type="password">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                </div>
+              </div>
+          </div>
+          <!-- <div class="form-group mb-3">
+            <div class="">
+                <p class="bg-danger formz" *ngIf="!checkPass">Your re-password is incorrect</p>
+            </div>
+        </div> -->
+            <div class="custom-control custom-control-alternative custom-checkbox">
+                <input class="custom-control-input" id="customCheckLogin" type="checkbox">
+                <label class="custom-control-label" for="customCheckLogin">
+                    <span class="text-muted formz">Remember me</span>
+                </label>
+            </div>
+            <div>
+              <p class="formz">Use an email address from your organization to easily interact with your colleagues
+              </p>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary my-4 formz form-control">Register</button>
+            </div>
+        </form>
+
+        </div>
+      </div>
+      <div class="row mt-3">
+      </div>
+    </div>
+  </div>
+</div>
