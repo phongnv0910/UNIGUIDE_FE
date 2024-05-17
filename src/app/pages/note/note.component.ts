@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NoteService } from 'src/core/services/note/note.service'; 
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-note',
@@ -8,9 +10,23 @@ import { Component } from '@angular/core';
 export class NoteComponent {
   noteContent: string = '';
 
+  constructor(
+    private noteService: NoteService,
+    private toastService: ToastrService
+  ) {}
+
   saveNote() {
-    // Implement logic to save the note (e.g., send it to a backend server)
-    console.log('Note content:', this.noteContent);
-    // You can add further logic here, such as sending the note content to a backend API
+    const formData = { content: this.noteContent };
+
+    this.noteService.note(formData).subscribe({
+      next: response => {
+        console.log('Response from server:', response);
+        this.toastService.success("Note submitted successfully!");
+      },
+      error: error => {
+        console.error('Error:', error);
+        this.toastService.error("There was an error submitting your note. Please try again.");
+      }
+    });
   }
 }
