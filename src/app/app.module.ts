@@ -13,6 +13,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { NoteComponent } from './pages/note/note.component'; 
+import { QuillModule } from 'ngx-quill';
+import { BrowserModule } from '@angular/platform-browser';  
 
 
 @NgModule({
@@ -24,7 +26,8 @@ import { NoteComponent } from './pages/note/note.component';
     NgbModule,
     RouterModule,
     AppRoutingModule,
-    
+    BrowserModule,
+    QuillModule.forRoot()
   ],
   declarations: [
     AppComponent,
