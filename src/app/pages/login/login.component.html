@@ -79,8 +79,7 @@
               >
               <small
               class="formz text-danger fw-600"
-              *ngIf=" form.get('password')!.touched ||
-              form.get('password')!.hasError('required')"
+              *ngIf="checking"
               >{{infoLoginError}}</small
             >
             </div>
