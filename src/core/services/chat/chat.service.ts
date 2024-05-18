@@ -1,16 +1,22 @@
 import { Injectable } from '@angular/core';
+import { ApiService } from '../api.service';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { JsonConvert } from 'json2typescript';
+import { Observable, catchError, map, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ChatService {
-  private apiUrl = 'YOUR_CHAT_API_ENDPOINT';
+export class ChatService extends ApiService{
 
-  constructor(private http: HttpClient) {}
+  constructor(protected http : HttpClient) {
+    super(http);
+    this.jsonConvert = new JsonConvert();
+   }
 
-  sendMessage(message: string): Observable<string> {
-    return this.http.post<string>(this.apiUrl, { message });
+   note(formData: any): Observable<any> {
+    let url = '/chat';
+    return super.postEntity(url, formData).pipe()
+ 
   }
 }

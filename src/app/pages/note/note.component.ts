@@ -50,17 +50,5 @@ export class NoteComponent {
     console.log('Closing chat...');
   }
   
-  sendMessage() {
-    if (this.userInput.trim() !== '') {
-      // Send user message to the chat service
-      this.chatService.sendMessage(this.userInput).subscribe(response => {
-        // Push user message to chatMessages array
-        this.chatMessages.push({ from: 'user', text: this.userInput });
-        // Push AI response to chatMessages array
-        this.chatMessages.push({ from: 'ai', text: response });
-        // Clear userInput after sending message
-        this.userInput = '';
-      });
-    }
-  }
+
 }
