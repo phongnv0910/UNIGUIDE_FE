@@ -151,6 +151,7 @@ this.serviceFolder.createFolder(formData).subscribe((data) => {
   console.log(data);
   this.loadService();
   this.ejDialog.hide();
+  this.inputFolderName = "";
 })
 }
 }
