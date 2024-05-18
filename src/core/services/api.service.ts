@@ -57,6 +57,8 @@ export class ApiService {
   //post
   protected postEntity(entitySet: string, body: Object = {}): Observable<any> {
     const options: any = {};
+    //@ts-ignore
+     options['headers'] = this.getHeaders();
     return this.http
       .post(`${environment.apiUrl}${entitySet}`, body, options)
       .pipe(catchError(this.formatErrors));

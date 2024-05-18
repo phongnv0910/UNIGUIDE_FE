@@ -22,6 +22,12 @@
     font-size: 15px;
     font-weight: 900;
 }
+.formf {
+  font-family: 'Inter', 'Sans-serif'; 
+}
+.fs-10{
+    font-size: 11px;
+}
 .ni-fat-add::before {
     float: right;
 }
@@ -33,3 +39,18 @@
   .menu-item-wrapper .ni-fat-add {
     margin-right: auto;
   }
+  .ni-collection::before {
+  margin-right: 9px;
+  }
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .dialog-content {
+    text-align: center;
+  }
+  
+
+  

@@ -25,4 +25,13 @@ export class FolderService extends ApiService{
       })
     )
   }
+  createFolder(folder: any): Observable<Responses> {
+    let url ='/Folder';
+    return super.postEntity(url, folder).pipe(
+      catchError((err) => throwError(() => new Error(err))),
+      map((res) => {
+        return res;
+      })
+    );
+}
 }
