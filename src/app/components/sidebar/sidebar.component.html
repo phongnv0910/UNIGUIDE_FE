@@ -46,7 +46,7 @@
                     </span>
                     <span class="fs-10">{{menuItem.title}}</span>
                   </a>
-                  <i class="ni ni-fat-add"></i>
+                  <i class="ni ni-fat-add" (click)="onOpenDialogFile($event)"></i>
                 </div>
                 <ul *ngIf="menuItem.isExpanded">
                   <ng-container *ngFor="let submenuItem of menuItem.file">
@@ -89,12 +89,38 @@
           <button id="sendButton2" class="e-control e-btn e-primary sendButton formf" data-ripple="true" (click)="close()">Cancel</button>
         </div>
       </ng-template>
-      <!-- <ng-template #footerTemplate>
-        <div class="button-container">
-          <button id="sendButton1" class="e-control e-btn e-secondary sendButton formf" data-ripple="true" (click)="save()">Save</button>
-          <button id="sendButton2" class="e-control e-btn e-primary sendButton formf" data-ripple="true" (click)="close()">Cancel</button>
-        </div>
-      </ng-template> -->
+ 
+</ejs-dialog>
+
+<ejs-dialog id='#ejDialogFile' #ejDialogFile isModal='true' [visible]="false" (overlayClick)="onOverlayClick" class="formf"
+[target]='targetElement' width='300px'>
+<ng-template #content>
+  <div class="dialog-content">
+    <h4>Create a New File</h4>
+    <input id="inVal" class="e-input formf" type="text" placeholder="Enter your file name!"/>
+    
+  </div>
+  <div class="button-container">
+    <button id="sendButton1" class="e-control e-btn e-secondary sendButton formf" data-ripple="true" (click)="saveFile()">Save</button>
+    <button id="sendButton2" class="e-control e-btn e-primary sendButton formf" data-ripple="true" (click)="close()">Cancel</button>
+  </div>
+</ng-template>
+<ng-template #footerTemplate>
+  <div class="e-section-control">
+    <ul style="display: flex;">
+   <li><ejs-radiobutton label="Simple Note" name="default"></ejs-radiobutton></li>
+   <li><ejs-radiobutton label="To Do List" name="default"></ejs-radiobutton></li>
+   </ul>
+   </div>
+   <div class="e-section-control">
+    <ul style="display: flex;">
+   <li> <img class="img20" src="assets\background\temp1.jpg"/></li>
+   <li> <img class="img20" src="assets\background\temp1.jpg"/></li>
+   </ul>
+   </div>
+  
+</ng-template>
+
 </ejs-dialog>
 
         <!-- <ng-container *ngFor="let menuItem of menuItems">

@@ -54,6 +54,7 @@ export class SidebarComponent implements OnInit {
   public listFolders : Folder;
   public listFile : Array<any>=[];
    @ViewChild('ejDialog') ejDialog: DialogComponent | any;
+   @ViewChild('ejDialogFile') ejDialogFile: DialogComponent | any;
   // @ViewChild('container', { read: ElementRef, static: true }) container: ElementRef | any;
   public targetElement?: HTMLElement;
   constructor(private router: Router,
@@ -119,9 +120,9 @@ export class SidebarComponent implements OnInit {
 }
 close(){
   this.ejDialog.hide();
+  this.ejDialogFile.hide();
 }
   toggleSubMenuExpansions(menuItem: any) {
-   console.log("menuItem",menuItem)
     this.menuItems.forEach(item => {
       if (item !== menuItem) {
         item.isExpanded = false;
@@ -143,7 +144,6 @@ close(){
     };
 };
 save(){
-console.log("event",this.inputFolderName);
 let formData =  {
   folderName : this.inputFolderName
 }
@@ -153,5 +153,17 @@ this.serviceFolder.createFolder(formData).subscribe((data) => {
   this.ejDialog.hide();
   this.inputFolderName = "";
 })
+}
+onOpenDialogFile = (event: any): void => {
+  this.ejDialogFile.show();
+  this.ejDialogFile.width = '400px'; 
+
+  this.ejDialogFile.animationSettings = {
+    effect: 'Fade',
+    duration: 100,
+    delay: 0,
+  };
+};
+saveFile(){
 }
 }
