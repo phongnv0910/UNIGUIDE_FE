@@ -10,12 +10,11 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { AppRoutingModule } from './app.routing';
+import { AppRoutingModule, routes } from './app.routing'; // Import routes
 import { ComponentsModule } from './components/components.module';
 import { NoteComponent } from './pages/note/note.component'; 
 import { QuillModule } from 'ngx-quill';
 import { BrowserModule } from '@angular/platform-browser';  
-
 
 @NgModule({
   imports: [
@@ -24,10 +23,10 @@ import { BrowserModule } from '@angular/platform-browser';
     HttpClientModule,
     ComponentsModule,
     NgbModule,
-    RouterModule,
     AppRoutingModule,
     BrowserModule,
-    QuillModule.forRoot()
+    QuillModule.forRoot(),
+    RouterModule.forRoot(routes, { useHash: false }) // Use the imported routes
   ],
   declarations: [
     AppComponent,
@@ -35,6 +34,7 @@ import { BrowserModule } from '@angular/platform-browser';
     AuthLayoutComponent,
     NoteComponent
   ],
+  exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent]
 })

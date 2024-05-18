@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NoteService } from 'src/core/services/note/note.service'; 
+import { NoteService } from 'src/core/services/note/note.service';
 import { ToastrService } from 'ngx-toastr';
+import { ChatService } from 'src/core/services/chat/chat.service'; // Import the ChatService
 
 @Component({
   selector: 'app-note',
@@ -9,6 +10,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class NoteComponent {
   noteContent: string = '';
+  chatMessages: any[] = []; // Add chatMessages array
+  userInput: string = ''; // Add userInput string
 
   editorConfig = {
     toolbar: [
@@ -23,7 +26,8 @@ export class NoteComponent {
 
   constructor(
     private noteService: NoteService,
-    private toastService: ToastrService
+    private toastService: ToastrService,
+    private chatService: ChatService // Inject the ChatService
   ) {}
 
   saveNote() {
@@ -40,4 +44,11 @@ export class NoteComponent {
       }
     });
   }
+
+  closeChat() {
+    // Implement the logic to close the chat here
+    console.log('Closing chat...');
+  }
+  
+
 }
