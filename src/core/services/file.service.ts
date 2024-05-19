@@ -28,4 +28,13 @@ export class FileService extends ApiService{
       })
   )
   }
+  createFile(folder: any): Observable<Responses> {
+    let url ='/File';
+    return super.postEntity(url, folder).pipe(
+      catchError((err) => throwError(() => new Error(err))),
+      map((res) => {
+        return res;
+      })
+    );
+}
 }

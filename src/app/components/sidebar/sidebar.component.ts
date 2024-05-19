@@ -6,6 +6,8 @@ import { FileService } from 'src/core/services/file.service';
 import { FolderService } from 'src/core/services/folder.service';
 import { ObjectType } from 'src/core/ultils/constaints';
 import { EmitType } from '@syncfusion/ej2-base';
+import { UserLogged } from 'src/core/ultils/userLogged';
+import { NgForm } from '@angular/forms';
 // Mở rộng giao diện RouteInfo để hỗ trợ submenu
 declare interface RouteInfo {
   id: number;
@@ -41,17 +43,22 @@ export const ROUTES: RouteInfo[] = [
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
   public isExpanded : boolean = false;
   inputFolderName : any;
+  inputFileName : any;
   public menuItems: any[];
   public isCollapsed = true;
+  idFolder : any;
   boldIconUp = true;
   showTextBox: boolean = false;
   isExpandChild : boolean = false;
   public listFolders : Folder;
+  public checkToken = false;
+  public selectedOption: any;
+  public userLogged = new UserLogged();
   public listFile : Array<any>=[];
    @ViewChild('ejDialog') ejDialog: DialogComponent | any;
    @ViewChild('ejDialogFile') ejDialogFile: DialogComponent | any;
@@ -63,6 +70,12 @@ export class SidebarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if(this.userLogged.getToken() == ""){
+      this.checkToken = false;
+    }
+    else{
+      this.checkToken = true;
+    }
    // this.initilaizeTarget();
     this.loadService();
     this.menuItems = ROUTES.filter(menuItem => menuItem);
@@ -118,11 +131,15 @@ export class SidebarComponent implements OnInit {
   public onOverlayClick: EmitType<object> = () => {
     this.ejDialog.hide();
 }
+submitForm(form: NgForm): void  {
+  console.log("form",form.value);
+}
 close(){
   this.ejDialog.hide();
   this.ejDialogFile.hide();
 }
   toggleSubMenuExpansions(menuItem: any) {
+    //console.log(menuItem)
     this.menuItems.forEach(item => {
       if (item !== menuItem) {
         item.isExpanded = false;
@@ -130,11 +147,19 @@ close(){
     });
     
     menuItem.isExpanded = !menuItem.isExpanded;
-
+  }
+  getValueCol(value : any){
+    console.log("value in plus",value)
   }
   onInputTextChange(event: any) {
    this.inputFolderName = event.target.value;
   }
+  onInputTextChangeFiles(event: any) {
+    this.inputFileName = event.target.value;
+  }
+   onSelectedChange(event: any) {
+     this.selectedOption = event.value;
+   }
   public onOpenDialog = (event: any): void => {
     this.ejDialog.show();
     this.ejDialog.animationSettings = {
@@ -143,6 +168,23 @@ close(){
       delay: 0,
     };
 };
+saveFile(){
+  console.log("inputFileName",this.inputFileName)
+  console.log("selectedOption",this.selectedOption)
+  // console.log("inputFolderName",this.menuItems.objectId)
+  let form = {
+    fileName : this.inputFileName,
+    typeFile : this.selectedOption,
+    
+  }
+  // this.serviceFile.createFile(form).subscribe((data) => {
+  //   console.log(data);
+  //   this.loadService();
+  //   this.ejDialog.hide();
+  //   this.inputFileName = "";
+  //   this.selectedOption = "";
+  // })
+}
 save(){
 let formData =  {
   folderName : this.inputFolderName
@@ -154,7 +196,8 @@ this.serviceFolder.createFolder(formData).subscribe((data) => {
   this.inputFolderName = "";
 })
 }
-onOpenDialogFile = (event: any): void => {
+onOpenDialogFile = (event: any,value: any): void => {
+  console.log("event",value)
   this.ejDialogFile.show();
   this.ejDialogFile.width = '400px'; 
 
@@ -164,6 +207,5 @@ onOpenDialogFile = (event: any): void => {
     delay: 0,
   };
 };
-saveFile(){
-}
+
 }

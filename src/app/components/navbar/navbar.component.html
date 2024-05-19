@@ -42,7 +42,7 @@
       </li>
     </ul> -->
 
-    <ul class="navbar-nav align-items-center d-none d-md-flex">
+    <ul class="navbar-nav align-items-center d-none d-md-flex" *ngIf="!checkToken">
       <li class="nav-item" placement="bottom-right">
         <a class="nav-link pr-0" role="button">
           <div class="media align-items-center">
@@ -59,9 +59,7 @@
         <li class="nav-item" placement="bottom-right">
           <a class="nav-link pr-0" role="button">
             <div class="media align-items-center" style="background-color: black; border-radius: 10px;">
-              <!-- <span class="avatar avatar-sm rounded-circle">
-                <img alt="Image placeholder" src="assets/img/theme/team-4-800x800.jpg">
-              </span> -->
+         
               <a class="nav-link nav-link-icon" routerLinkActive="active" [routerLink]="['/login']">
                 
                 <p class="login" style="margin: 0;">Login</p>
@@ -69,6 +67,21 @@
             </div>
           </a>
           </li>
+        </ul>
+        <ul class="navbar-nav align-items-center d-none d-md-flex" *ngIf="checkToken">
+         
+            <li class="nav-item" placement="bottom-right">
+              <a class="nav-link pr-0" role="button">
+                <div class="media align-items-center" style="background-color: black; border-radius: 10px;">
+             
+                  <a class="nav-link nav-link-icon" routerLinkActive="active" [routerLink]="['/login']" (click)="logout()">
+                    
+                    <p class="login" style="margin: 0;">Logout</p>
+                  </a>
+                </div>
+              </a>
+              </li>
+            </ul>
         <!-- <div class="dropdown-menu-arrow dropdown-menu-right" ngbDropdownMenu>
           <div class=" dropdown-header noti-title">
             <h6 class="text-overflow m-0">Welcome!</h6>
@@ -96,6 +109,6 @@
           </a>
         </div> -->
      
-    </ul>
+   
   </div>
 </nav>
