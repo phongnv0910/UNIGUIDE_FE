@@ -33,7 +33,6 @@ import { BrowserModule } from '@angular/platform-browser';
     AdminLayoutComponent,
     AuthLayoutComponent,
     NoteComponent,
-    BlankFormComponent,
   ],
   exports: [RouterModule],
   providers: [],
