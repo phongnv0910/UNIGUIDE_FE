@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NoteService } from 'src/core/services/note/note.service';
+import { NoteService } from 'src/core/services/note/note.service';
 import { ToastrService } from 'ngx-toastr';
 import { ChatService } from 'src/core/services/chat/chat.service'; // Import the ChatService
 

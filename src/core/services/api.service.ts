@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { JsonConvert } from 'json2typescript';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { UserLogged } from '../ultils/userLogged';
 
 @Injectable({
   providedIn: 'root',
@@ -29,11 +30,13 @@ export class ApiService {
     return this.http.post(environment.apiUrl + url, body, options);
   }
   //Get
-  public get(url: any, params: any = null): Observable<Object> {
+  protected get(url: string, params: any = null): Observable<Object> {
     params = params || {};
-    const options: any = {
+    const options = {
       params,
     };
+    // @ts-ignore
+     options['headers'] = this.getHeaders();
     return this.http.get(environment.apiUrl + url, options);
   }
   protected postFile(url: string, body: any): Observable<any> {
@@ -54,6 +57,8 @@ export class ApiService {
   //post
   protected postEntity(entitySet: string, body: Object = {}): Observable<any> {
     const options: any = {};
+    //@ts-ignore
+     options['headers'] = this.getHeaders();
     return this.http
       .post(`${environment.apiUrl}${entitySet}`, body, options)
       .pipe(catchError(this.formatErrors));
@@ -90,5 +95,15 @@ export class ApiService {
     return this.http
       .delete(`${environment.apiUrl}${entitySet}/${id}`, options)
       .pipe(catchError(this.formatErrors));
+  }
+  protected getHeaders(): Object {
+    let header: any = {
+      Accept: 'application/json',
+    };
+    let userLogged: UserLogged = new UserLogged();
+    if (userLogged.isLogged()) {
+      header['Authorization'] = 'Bearer ' + userLogged.getToken();
+    }
+    return header;
   }
 }

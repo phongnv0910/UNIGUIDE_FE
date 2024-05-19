@@ -118,6 +118,28 @@ export class SemesterConverter implements JsonCustomConvert<Semester[]>{
         return jsonConvert.deserializeArray(data, Semester);
     }
 }
+@JsonConverter
+export class FolderConverter implements JsonCustomConvert<Folder[]>{
+    serialize(data: Folder[]) {
+        const jsonConvert = new JsonConvert();
+        return jsonConvert.serializeArray(data);
+    }
+    deserialize(data: any): Folder[] {
+        const jsonConvert = new JsonConvert();
+        return jsonConvert.deserializeArray(data, Folder);
+    }
+}
+@JsonConverter
+export class FileConverter implements JsonCustomConvert<File[]>{
+    serialize(data: File[]) {
+        const jsonConvert = new JsonConvert();
+        return jsonConvert.serializeArray(data);
+    }
+    deserialize(data: any): File[] {
+        const jsonConvert = new JsonConvert();
+        return jsonConvert.deserializeArray(data, File);
+    }
+}
 @JsonObject("University")
 export class University {
     @JsonProperty('UniversityId', NumberConverter, true)
@@ -139,3 +161,22 @@ export class Semester {
     @JsonProperty('SemesterName', StringConverter, true)
     SemesterName: string = undefined as any;
 }
+@JsonObject("File")
+export class File {
+    @JsonProperty('FileId', NumberConverter, true)
+    FileId: number = undefined as any;
+    @JsonProperty('FileName', StringConverter, true)
+    FileName: string = undefined as any;
+    @JsonProperty('FolderId', NumberConverter, true)
+    FolderId: number = undefined as any;
+}
+@JsonObject("Folder")
+export class Folder {
+    @JsonProperty('FolderId', NumberConverter, true)
+    FolderId: number = undefined as any;
+    @JsonProperty('FolderName', StringConverter, true)
+    FolderName: string = undefined as any;
+    @JsonProperty('File', File, true)
+    File: File = undefined as any;
+}
+

@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { LoginService } from 'src/core/services/login/login.service';
 import { ToastrService } from 'ngx-toastr';
+import { UserLogged } from 'src/core/ultils/userLogged';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -51,6 +52,12 @@ export class LoginComponent implements OnInit, OnDestroy {
       console.log("res in login",res.data);
       if(res.data == ""){
         this.checking = true;
+        this.router.navigate(['/login']);
+      }
+      else{
+        let userLogged: UserLogged = new UserLogged();
+        userLogged.setCurrentUser(res.data);
+        this.router.navigate(['/dashboard']);
       }
     })
   }

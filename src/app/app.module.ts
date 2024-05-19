@@ -32,7 +32,8 @@ import { BrowserModule } from '@angular/platform-browser';
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    NoteComponent
+    NoteComponent,
+    BlankFormComponent,
   ],
   exports: [RouterModule],
   providers: [],

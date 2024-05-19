@@ -22,3 +22,50 @@
     font-size: 15px;
     font-weight: 900;
 }
+.formf {
+  font-family: 'Inter', 'Sans-serif'; 
+}
+.fs-10{
+    font-size: 13px;
+}
+.ni-fat-add::before {
+    float: right;
+}
+.menu-item-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  
+  .menu-item-wrapper .ni-fat-add {
+    margin-right: auto;
+  }
+  .ni-collection::before {
+  margin-right: 9px;
+  }
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .dialog-content {
+    text-align: center;
+  }
+  li {
+    display: inline; 
+    margin-right: 10px;
+}
+.img20 {
+  max-width: 100%;
+  max-height: 100%;
+  border: 2px;
+}
+.e-section-control {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+  
+
+  

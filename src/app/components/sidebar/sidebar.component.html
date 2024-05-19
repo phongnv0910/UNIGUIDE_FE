@@ -24,8 +24,121 @@
         </div>
       </form> -->
       <!-- Navigation -->
-      <ul class="navbar-nav">
-        <ng-container *ngFor="let menuItem of menuItems">
+      <ul class="navbar-nav" *ngIf="checkToken">
+        <li class="nav-item">
+          <a routerLinkActive="active" [routerLink]="['/dashboard']" class="nav-link" (click)="toggleMenuExpansion()">
+          
+            <i class="ni ni-books text-blue"></i>
+            <i class="ni" [ngClass]="{'ni-bold-down': isExpanded, 'ni-bold-right': !isExpanded}"></i> 
+            <span class="formf">Note</span>
+            <i class="ni ni-fat-add" style="float: right" id="targetButton" (click)="onOpenDialog($event)"></i>
+          </a>
+          <!-- <div *ngIf="showTextBox" class="input-group">
+            <input type="text" class="form-control" placeholder="Enter text here">
+          </div> -->
+          <ul *ngIf="isExpanded"> <!-- Nested ul for submenu items -->
+            <ng-container *ngFor="let menuItem of menuItems">
+              <li class="{{menuItem.class}} nav-item" *ngIf="menuItem.parentid === 2">
+                <div class="menu-item-wrapper">
+                  <a routerLinkActive="active" class="nav-link" style="display: contents;" (click)="toggleSubMenuExpansions(menuItem)">
+                    <span class="icon-wrapper">
+                      <i class="ni" [ngClass]="{'ni-bold-down': menuItem.isExpanded, 'ni-bold-right': !menuItem.isExpanded}"style="margin-right: 10px"></i>
+                    </span>
+                    <span style="margin-left:5px" class="fs-10">
+                      <i class="ni {{menuItem.icon}}" style="margin-right: 5px;"></i>  <span class="formf"> {{menuItem.title}}</span>
+                    </span>
+                  
+                  </a>
+                  <i class="ni ni-fat-add" (click)="onOpenDialogFile($event,menuItem.objectId)" style="margin-left: 10px;"></i>
+                </div>
+                <ul *ngIf="menuItem.isExpanded" style="margin-top: 15px;">
+                  <ng-container *ngFor="let submenuItem of menuItem.file">
+                    <li class="nav-item">
+                      <div class="menu-item-wrapper">
+                      <a routerLinkActive="active" href="/normal-form">
+                       <span> <i class="ni ni-collection"></i></span>
+                       <span style="margin-left:5px" class="fs-10">
+                        <span class="formf">{{submenuItem.fileName}} </span>
+                       </span>
+                      </a>
+                      </div>
+                    </li>
+                  </ng-container>
+                </ul>
+              </li>
+            </ng-container>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a routerLinkActive="active" [routerLink]="['/dashboard']" class="nav-link">
+            <i class="ni ni-pin-3 text-orange"></i> Accommodation
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLinkActive="active" [routerLink]="['/tables']" class="nav-link">
+            <i class="ni ni-single-02 text-yellow"></i> Club
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLinkActive="active" [routerLink]="['/Notifications']" class="nav-link">
+            <i class="ni ni-pin-3 text-orange"></i> Notification
+          </a>
+        </li>
+      </ul>
+      
+      
+      
+      <ejs-dialog id='dialog' #ejDialog isModal='true' [visible]="false" (overlayClick)="onOverlayClick" class="formf"
+      [target]='targetElement' width='300px'>
+      <ng-template #content>
+        <div class="dialog-content">
+          <h4>Create a New Folder</h4>
+          <input id="inVal" class="e-input formf" type="text" placeholder="Enter your folder name!" (change)="onInputTextChange($event)"/>
+          
+        </div>
+        <div class="button-container">
+          <button id="sendButton1" class="e-control e-btn e-secondary sendButton formf" data-ripple="true" (click)="save()">Save</button>
+          <button id="sendButton2" class="e-control e-btn e-primary sendButton formf" data-ripple="true" (click)="close()">Cancel</button>
+        </div>
+      </ng-template>
+ 
+</ejs-dialog>
+
+<ejs-dialog id='#ejDialogFile' #ejDialogFile isModal='true' [visible]="false" (overlayClick)="onOverlayClick" class="formf"
+[target]='targetElement' width='300px'>
+<ng-template #content>
+  <div class="dialog-content">
+    <h4>Create a New File</h4>
+    <input id="inVal2" class="e-input formf" type="text" placeholder="Enter your file name!" (change)="onInputTextChangeFiles($event)"/>
+    
+  </div>
+ 
+</ng-template>
+<ng-template #footerTemplate>
+  <div class="e-section-control">
+      <ul style="display: flex;">
+        <li>
+          <ejs-radiobutton label="Simple Note" (change)="onSelectedChange($event)" value="SIMPLE" name="default"></ejs-radiobutton>
+        </li>
+        <li style="margin-left: 60px;">
+          <ejs-radiobutton label="To Do List" (change)="onSelectedChange($event)" value="TODOLIST" name="default"></ejs-radiobutton>
+        </li>
+      </ul>
+  </div>
+  <div class="e-section-control">
+    <ul style="display: flex;">
+      <li><img class="img20" src="assets\background\temp1.jpg" /></li>
+      <li><img class="img20" src="assets\background\temp1.jpg" /></li>
+    </ul>
+  </div>
+  <div class="button-container">
+    <button id="sendButton1" class="e-control e-btn e-secondary sendButton formf" data-ripple="true" (click)="saveFile()">Save</button>
+    <button id="sendButton2" class="e-control e-btn e-primary sendButton formf" data-ripple="true" (click)="close()">Cancel</button>
+  </div>
+</ng-template>
+</ejs-dialog>
+
+        <!-- <ng-container *ngFor="let menuItem of menuItems">
           <li class="{{menuItem.class}} nav-item" *ngIf="menuItem.parentid === null">
             <a routerLinkActive="active" [routerLink]="[menuItem.path]" class="nav-link"
                *ngIf="menuItem.hasSubmenu; else noSubmenu">
@@ -47,11 +160,11 @@
                     {{submenuItem.title}}
                   </a>
                 </li>
-              </ng-container>
+              </ng-container> 
             </ul>
           </li>
-        </ng-container>
-      </ul>
+        </ng-container>-->
+      
       
       
         
