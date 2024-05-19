@@ -12,7 +12,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
-import { NoteComponent } from './pages/note/note.component'; 
+import { NoteComponent } from './pages/note/note.component';
+import { BlankFormComponent } from './pages/blank-form/blank-form.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { NoteComponent } from './pages/note/note.component';
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    NoteComponent
+    NoteComponent,
+    BlankFormComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

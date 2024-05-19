@@ -12,6 +12,9 @@ import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NormalFormComponent } from 'src/app/pages/normal-form/normal-form.component';
+import { GridAllModule } from '@syncfusion/ej2-angular-grids';
+import { NotificationsComponent } from 'src/app/pages/notifications/notifications.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -21,14 +24,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ClipboardModule
+    ClipboardModule,
+    GridAllModule
   ],
   declarations: [
     DashboardComponent,
     UserProfileComponent,
     TablesComponent,
     IconsComponent,
-    MapsComponent
+    MapsComponent,
+    NormalFormComponent,
+    NotificationsComponent
   ]
 })
 

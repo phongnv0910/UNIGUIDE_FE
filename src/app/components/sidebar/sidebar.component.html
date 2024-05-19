@@ -27,7 +27,10 @@
       <ul class="navbar-nav" *ngIf="checkToken">
         <li class="nav-item">
           <a routerLinkActive="active" [routerLink]="['/dashboard']" class="nav-link" (click)="toggleMenuExpansion()">
-            <i class="ni" [ngClass]="{'ni-bold-down': isExpanded, 'ni-bold-right': !isExpanded}"></i> Note
+          
+            <i class="ni ni-books text-blue"></i>
+            <i class="ni" [ngClass]="{'ni-bold-down': isExpanded, 'ni-bold-right': !isExpanded}"></i> 
+            <span class="formf">Note</span>
             <i class="ni ni-fat-add" style="float: right" id="targetButton" (click)="onOpenDialog($event)"></i>
           </a>
           <!-- <div *ngIf="showTextBox" class="input-group">
@@ -39,23 +42,23 @@
                 <div class="menu-item-wrapper">
                   <a routerLinkActive="active" class="nav-link" style="display: contents;" (click)="toggleSubMenuExpansions(menuItem)">
                     <span class="icon-wrapper">
-                      <i class="ni" [ngClass]="{'ni-bold-down': menuItem.isExpanded, 'ni-bold-right': !menuItem.isExpanded}"></i>
+                      <i class="ni" [ngClass]="{'ni-bold-down': menuItem.isExpanded, 'ni-bold-right': !menuItem.isExpanded}"style="margin-right: 10px"></i>
                     </span>
                     <span style="margin-left:5px" class="fs-10">
-                      <i class="ni {{menuItem.icon}}"></i> {{menuItem.title}}
+                      <i class="ni {{menuItem.icon}}" style="margin-right: 5px;"></i>  <span class="formf"> {{menuItem.title}}</span>
                     </span>
                   
                   </a>
-                  <i class="ni ni-fat-add" (click)="onOpenDialogFile($event,menuItem.objectId)"></i>
+                  <i class="ni ni-fat-add" (click)="onOpenDialogFile($event,menuItem.objectId)" style="margin-left: 10px;"></i>
                 </div>
-                <ul *ngIf="menuItem.isExpanded">
+                <ul *ngIf="menuItem.isExpanded" style="margin-top: 15px;">
                   <ng-container *ngFor="let submenuItem of menuItem.file">
                     <li class="nav-item">
                       <div class="menu-item-wrapper">
-                      <a routerLinkActive="active">
+                      <a routerLinkActive="active" href="/normal-form">
                        <span> <i class="ni ni-collection"></i></span>
                        <span style="margin-left:5px" class="fs-10">
-                        <i class="ni ni-pin-3"></i>  {{submenuItem.fileName}}
+                        <span class="formf">{{submenuItem.fileName}} </span>
                        </span>
                       </a>
                       </div>
@@ -72,8 +75,13 @@
           </a>
         </li>
         <li class="nav-item">
-          <a routerLinkActive="active" [routerLink]="['/dashboard']" class="nav-link">
-            <i class="ni ni-single-02 text-yellow"></i> Restaurant
+          <a routerLinkActive="active" [routerLink]="['/tables']" class="nav-link">
+            <i class="ni ni-single-02 text-yellow"></i> Club
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLinkActive="active" [routerLink]="['/Notifications']" class="nav-link">
+            <i class="ni ni-pin-3 text-orange"></i> Notification
           </a>
         </li>
       </ul>

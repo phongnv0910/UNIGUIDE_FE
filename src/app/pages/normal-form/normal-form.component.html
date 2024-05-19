@@ -1,0 +1,44 @@
+<div class="header pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <!-- Card stats -->
+      <h1 font-char>To-Dos</h1>
+      <div class="row">
+        <div class="col-xl-3 col-lg-6"></div>
+        <div class="col-xl-3 col-lg-6"></div>
+        <div class="col-xl-3 col-lg-6"></div>
+        <div class="col-xl-3 col-lg-6"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid mt--7">
+  <div class="row"></div>
+  <div class="card-body">
+    <ejs-grid [dataSource]='data' [toolbar]="toolbarOptions"
+      [allowFiltering]="true"
+      gridLines="Both"
+      [allowSorting]="true"
+      [allowPaging]="true"
+      [editSettings]="editSettings">
+        <e-columns>
+            <e-column headerText='Status' width='150' textAlign='Center'>
+              <ng-template #template let-data>
+                <div *ngIf="data.Discontinued; else elseblock">
+                     <input type="checkbox" checked>
+                </div>
+              </ng-template>
+              <ng-template #elseblock><input type="checkbox"></ng-template>
+           </e-column>
+            <e-column field='QuantityPerUnit' headerText='Time' width=150></e-column> 
+            <e-column field='CategoryName' headerText='Task Name' width=150></e-column>
+            <e-column field='ProductName' headerText='Assign For' width=150></e-column>
+        </e-columns>
+    </ejs-grid>
+  </div>
+  <div class="row mt-5">
+    <div class="col-xl-12 mb-5 mb-xl-0"></div>
+  </div>
+</div>
+
+<div class="table-responsive"></div>

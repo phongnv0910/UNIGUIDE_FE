@@ -106,7 +106,7 @@ export class SidebarComponent implements OnInit {
   objectId: this.listFolders[index]?.folderId, 
   path: '/' + folderName,
   title: folderName,
-  icon: 'ni-collection',
+  icon: 'ni-bullet-list-67',
   class: 'formz fs-10',
   hasSubmenu: false,
   isChildExpand: true,
@@ -139,7 +139,7 @@ close(){
   this.ejDialogFile.hide();
 }
   toggleSubMenuExpansions(menuItem: any) {
-    //console.log(menuItem)
+    this.refreshFile();
     this.menuItems.forEach(item => {
       if (item !== menuItem) {
         item.isExpanded = false;
@@ -169,21 +169,25 @@ close(){
     };
 };
 saveFile(){
-  console.log("inputFileName",this.inputFileName)
-  console.log("selectedOption",this.selectedOption)
-  // console.log("inputFolderName",this.menuItems.objectId)
   let form = {
     fileName : this.inputFileName,
     typeFile : this.selectedOption,
+    folderId : this.idFolder
     
   }
-  // this.serviceFile.createFile(form).subscribe((data) => {
-  //   console.log(data);
-  //   this.loadService();
-  //   this.ejDialog.hide();
-  //   this.inputFileName = "";
-  //   this.selectedOption = "";
-  // })
+ 
+  this.serviceFile.createFile(form).subscribe((data) => {
+    console.log(data);
+    this.refreshFile();
+    this.inputFileName = "";
+    this.selectedOption = "";
+  })
+  this.ejDialogFile.hide();
+}
+refreshFile(){
+  this.serviceFile.getFileByIdFolder(this.idFolder).subscribe((data) => {
+    
+  })
 }
 save(){
 let formData =  {
@@ -198,6 +202,7 @@ this.serviceFolder.createFolder(formData).subscribe((data) => {
 }
 onOpenDialogFile = (event: any,value: any): void => {
   console.log("event",value)
+  this.idFolder = value;
   this.ejDialogFile.show();
   this.ejDialogFile.width = '400px'; 
 
