@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy,ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
-import { EmailValidators } from 'ngx-validators'
+import { Component, OnInit, OnDestroy,ViewEncapsulation, ViewChild } from '@angular/core';
+import { EmailValidators } from 'ngx-validators';
+import { ToastComponent } from '@syncfusion/ej2-angular-notifications';
 import {
   UntypedFormGroup,
   UntypedFormBuilder,
@@ -17,22 +17,19 @@ import { UserLogged } from 'src/core/ultils/userLogged';
   encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  public router: Router;
   public form: UntypedFormGroup;
   public email: UntypedFormControl;
   public password: UntypedFormControl;
   public checking = false;
-  public infoLoginError : String ="Email or Password is not correct!";
+  public position = { X: 'Right' };
+  public header : string ='';
+  public titlee : string ='';
+  @ViewChild('element') element: ToastComponent;
   constructor(
-    router: Router,
     fb: UntypedFormBuilder,
     private readonly loginService : LoginService,
     private toastService : ToastrService
   ) { 
-  //   setTimeout(() => {
-  //   jQuery('#videoCompressorModal').modal('hide');
-  // }, 200);
-  this.router = router;
   this.form = fb.group({
     'email': ['', Validators.compose([Validators.required, EmailValidators.normal])],
     'password': ['', Validators.compose([Validators.required, Validators.minLength(6)])]
@@ -40,26 +37,41 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   this.email = this.form.controls['email'] as UntypedFormControl;
   this.password = this.form.controls['password'] as UntypedFormControl;}  
+  ngOnDestroy(): void {
+    throw new Error('Method not implemented.');
+  }
   
   ngOnInit() {
-    console.log("email",this.email);
-    console.log("password",this.password);
   }
-  ngOnDestroy() {
+
+  onCreate(event: any) {
+    this.element.show();
   }
+
   public onSubmit(values: any): void {
-    this.loginService.login(values).subscribe((res) => {
-      console.log("res in login",res.data);
-      if(res.data == ""){
-        this.checking = true;
-        this.router.navigate(['/login']);
+    this.loginService.login(values).subscribe(
+      (res) => {
+        console.log("Response from login:", res.data);
+        if (res.data === "") {
+          this.checking = true;
+          this.header = "Error";
+          this.titlee = "Your email or password is incorrect";
+          this.element.show();
+       
+        } else {
+          const userLogged: UserLogged = new UserLogged();
+          userLogged.setCurrentUser(res.data);
+          console.log("co token");
+          this.header = "Successfully";
+          this.titlee = "You login successfully";
+          window.location.href = '/dashboard';
+          this.element.show();
+        }
+      },
+      (error) => {
       }
-      else{
-        let userLogged: UserLogged = new UserLogged();
-        userLogged.setCurrentUser(res.data);
-        this.router.navigate(['/dashboard']);
-      }
-    })
+    );
   }
+  
 
 }

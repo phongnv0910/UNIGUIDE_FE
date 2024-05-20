@@ -70,6 +70,7 @@ export class SidebarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log("menu",this.menuItems)
     if(this.userLogged.getToken() == ""){
       this.checkToken = false;
     }

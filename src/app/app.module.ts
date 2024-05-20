@@ -14,7 +14,8 @@ import { AppRoutingModule, routes } from './app.routing'; // Import routes
 import { ComponentsModule } from './components/components.module';
 import { NoteComponent } from './pages/note/note.component'; 
 import { QuillModule } from 'ngx-quill';
-import { BrowserModule } from '@angular/platform-browser';  
+import { BrowserModule } from '@angular/platform-browser';
+import { ToastAllModule, ToastModule } from '@syncfusion/ej2-angular-notifications';
 
 @NgModule({
   imports: [

@@ -10,6 +10,7 @@ import { RegisterComponent } from '../../pages/register/register.component';
 import { DropDownListAllModule } from '@syncfusion/ej2-angular-dropdowns';
 import { TextBoxAllModule } from '@syncfusion/ej2-angular-inputs';
 import { ToastrModule } from 'ngx-toastr';
+import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
 @NgModule({
   imports: [
     CommonModule,
@@ -17,6 +18,7 @@ import { ToastrModule } from 'ngx-toastr';
     FormsModule,
     ReactiveFormsModule,
      NgbModule,
+     ToastAllModule,
      ToastrModule,
      DropDownListAllModule,
      TextBoxAllModule

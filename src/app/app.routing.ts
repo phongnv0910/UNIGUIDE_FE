@@ -25,7 +25,7 @@ const routes: Routes =[
       }
     ]
   }, {
-    path: '',
+    path: 'hi',
     component: AuthLayoutComponent,
     children: [
       {

@@ -9,7 +9,7 @@
     <div>
       <a class="navbar-brand pt-0" routerLinkActive="active" [routerLink]="['/dashboard']" style="display: flex; align-items: center;">
         <img src="./assets/img/theme/notion.jpg" class="navbar-brand-img" alt="..." style="max-height: 40px; margin-right: 0px;">
-        <p class="wordmark_fill__RZFeq" style="margin: 0; font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 600; color: #333;">NOTION</p>
+        <p class="wordmark_fill__RZFeq" style="margin: 0; font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 600; color: #333;">UNI GUIDE</p>
     </a>
     
 </div>
@@ -55,16 +55,17 @@
                   <ng-container *ngFor="let submenuItem of menuItem.file">
                     <li class="nav-item">
                       <div class="menu-item-wrapper">
-                      <a routerLinkActive="active" href="/normal-form">
-                       <span> <i class="ni ni-collection"></i></span>
-                       <span style="margin-left:5px" class="fs-10">
-                        <span class="formf">{{submenuItem.fileName}} </span>
-                       </span>
-                      </a>
+                        <a [routerLink]="submenuItem.filetype === 'SIMPLE' ? '/normal-form' : (submenuItem.filetype === 'TODOLIST' ? '/form-vipro' : '')" routerLinkActive="active">
+                          <span><i class="ni ni-collection"></i></span>
+                          <span style="margin-left: 5px;" class="fs-10">
+                            <span class="formf">{{ submenuItem.fileName }}</span>
+                          </span>
+                        </a>
                       </div>
                     </li>
                   </ng-container>
                 </ul>
+                
               </li>
             </ng-container>
           </ul>
@@ -127,8 +128,8 @@
   </div>
   <div class="e-section-control">
     <ul style="display: flex;">
-      <li><img class="img20" src="assets\background\temp1.jpg" /></li>
-      <li><img class="img20" src="assets\background\temp1.jpg" /></li>
+      <li><img class="img20" src="assets\background\temp3.jpg" /></li>
+      <li><img class="img20" src="assets\background\temp4.png" /></li>
     </ul>
   </div>
   <div class="button-container">

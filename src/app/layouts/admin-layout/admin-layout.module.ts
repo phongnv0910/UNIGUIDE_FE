@@ -7,14 +7,12 @@ import { ClipboardModule } from 'ngx-clipboard';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
-import { IconsComponent } from '../../pages/icons/icons.component';
-import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
-import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NormalFormComponent } from 'src/app/pages/normal-form/normal-form.component';
 import { GridAllModule } from '@syncfusion/ej2-angular-grids';
 import { NotificationsComponent } from 'src/app/pages/notifications/notifications.component';
+import { FormViproComponent } from 'src/app/pages/form-vipro/form-vipro.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -30,11 +28,9 @@ import { NotificationsComponent } from 'src/app/pages/notifications/notification
   declarations: [
     DashboardComponent,
     UserProfileComponent,
-    TablesComponent,
-    IconsComponent,
-    MapsComponent,
     NormalFormComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    FormViproComponent
   ]
 })
 
