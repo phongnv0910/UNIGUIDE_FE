@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NoteService } from 'src/core/services/note/note.service';
 import { ToastrService } from 'ngx-toastr';
 import { ChatService } from 'src/core/services/chat/chat.service'; // Import the ChatService
@@ -8,7 +8,7 @@ import { ChatService } from 'src/core/services/chat/chat.service'; // Import the
   templateUrl: './note.component.html',
   styleUrls: ['./note.component.scss']
 })
-export class NoteComponent {
+export class NoteComponent implements OnInit {
   noteContent: string = '';
   chatMessages: any[] = []; // Add chatMessages array
   userInput: string = ''; // Add userInput string
@@ -30,6 +30,15 @@ export class NoteComponent {
     private chatService: ChatService // Inject the ChatService
   ) {}
 
+  ngOnInit() {
+    // Load nội dung đã lưu từ localStorage khi trang được tải
+    const savedNote = localStorage.getItem('savedNote');
+    console.log(savedNote)
+    if (savedNote) {
+      this.noteContent = savedNote;
+    }
+  }
+
   saveNote() {
     const formData = { content: this.noteContent };
 
@@ -43,12 +52,20 @@ export class NoteComponent {
         this.toastService.error("There was an error submitting your note. Please try again.");
       }
     });
+
+    // Lưu nội dung ghi chú vào localStorage sau khi gửi lên server
+    localStorage.setItem('savedNote', this.noteContent);
+    console.log('Note content saved:', this.noteContent);
   }
 
   closeChat() {
     // Implement the logic to close the chat here
     console.log('Closing chat...');
   }
-  
 
+  onNoteContentChange(event: any) {
+    // Lưu nội dung ghi chú vào localStorage
+    localStorage.setItem('savedNote', this.noteContent);
+    console.log('Note content saved:', this.noteContent);
+  }
 }
