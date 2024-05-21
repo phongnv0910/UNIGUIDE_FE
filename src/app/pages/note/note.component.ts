@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ChangeDetectorRef} from '@angular/core';
 import { NoteService } from 'src/core/services/note/note.service';
 import { ToastrService } from 'ngx-toastr';
 import { ChatService } from 'src/core/services/chat/chat.service'; // Import the ChatService
@@ -27,17 +27,29 @@ export class NoteComponent implements OnInit {
   constructor(
     private noteService: NoteService,
     private toastService: ToastrService,
-    private chatService: ChatService // Inject the ChatService
+    private chatService: ChatService, // Inject the ChatService
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
-    // Load nội dung đã lưu từ localStorage khi trang được tải
+  
+  }
+  onEditorCreated(editor) {
     const savedNote = localStorage.getItem('savedNote');
-    console.log(savedNote)
+
     if (savedNote) {
-      this.noteContent = savedNote;
+      editor.clipboard.dangerouslyPasteHTML(savedNote);
     }
   }
+  // onEditorCreated(editor) {
+  //   const savedNote = localStorage.getItem('savedNote');
+  //   console.log('this is first log'+savedNote)
+
+  //   if (savedNote) {
+  //     console.log('this is log'+savedNote)
+  //     this.noteContent = savedNote;
+  //   }
+  // }
 
   saveNote() {
     const formData = { content: this.noteContent };
