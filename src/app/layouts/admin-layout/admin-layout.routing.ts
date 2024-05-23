@@ -6,6 +6,7 @@ import { NoteComponent } from '../../pages/note/note.component';
 import { NormalFormComponent } from 'src/app/pages/normal-form/normal-form.component';
 import { NotificationsComponent } from 'src/app/pages/notifications/notifications.component';
 import { FormViproComponent } from 'src/app/pages/form-vipro/form-vipro.component';
+import { ClubComponent } from 'src/app/pages/club/club.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -14,4 +15,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'normal-form',           component: NormalFormComponent },
     { path: 'notifications',          component: NotificationsComponent },
     { path: 'form-vipro',          component: FormViproComponent },
+    { path: 'club',          component: ClubComponent },
 ];

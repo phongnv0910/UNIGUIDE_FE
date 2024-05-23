@@ -13,6 +13,8 @@ import { NormalFormComponent } from 'src/app/pages/normal-form/normal-form.compo
 import { GridAllModule } from '@syncfusion/ej2-angular-grids';
 import { NotificationsComponent } from 'src/app/pages/notifications/notifications.component';
 import { FormViproComponent } from 'src/app/pages/form-vipro/form-vipro.component';
+import { ClubComponent } from 'src/app/pages/club/club.component';
+import { DialogModule } from '@syncfusion/ej2-angular-popups';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -22,6 +24,7 @@ import { FormViproComponent } from 'src/app/pages/form-vipro/form-vipro.componen
     FormsModule,
     HttpClientModule,
     NgbModule,
+    DialogModule,
     ClipboardModule,
     GridAllModule
   ],
@@ -30,7 +33,8 @@ import { FormViproComponent } from 'src/app/pages/form-vipro/form-vipro.componen
     UserProfileComponent,
     NormalFormComponent,
     NotificationsComponent,
-    FormViproComponent
+    FormViproComponent,
+    ClubComponent,
   ]
 })
 

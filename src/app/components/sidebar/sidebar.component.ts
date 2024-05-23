@@ -56,6 +56,9 @@ export class SidebarComponent implements OnInit {
   showTextBox: boolean = false;
   isExpandChild : boolean = false;
   public listFolders : Folder;
+  public checkRequiredRadio : boolean = false;
+  public checkNameFolder : boolean = false;
+  public checkNameFile : boolean = false;
   public checkToken = false;
   public selectedOption: any;
   public userLogged = new UserLogged();
@@ -170,6 +173,14 @@ close(){
     };
 };
 saveFile(){
+console.log("selectedoptons",this.selectedOption);
+  if(this.selectedOption == null){
+    this.checkRequiredRadio = true;
+  }
+  if(this.inputFileName == ""){
+    this.checkNameFile = true;
+  }
+  if(this.checkNameFile == false && this.checkRequiredRadio == false){
   let form = {
     fileName : this.inputFileName,
     typeFile : this.selectedOption,
@@ -180,15 +191,25 @@ saveFile(){
   this.serviceFile.createFile(form).subscribe((data) => {
     console.log(data);
     this.refreshFile();
-    this.inputFileName = "";
-    this.selectedOption = "";
+    let form = {
+      fileName : "",
+      typeFile : "",
+      folderId : null
+    }
+  
   })
+  this.inputFileName = "";
+  this.selectedOption = "";
   this.ejDialogFile.hide();
 }
+}
 refreshFile(){
-  this.serviceFile.getFileByIdFolder(this.idFolder).subscribe((data) => {
+  
+  if(this.idFolder){
+    this.serviceFile.getFileByIdFolder(this.idFolder).subscribe((data) => {
     
-  })
+    })
+  }
 }
 save(){
 let formData =  {
@@ -200,9 +221,11 @@ this.serviceFolder.createFolder(formData).subscribe((data) => {
   this.ejDialog.hide();
   this.inputFolderName = "";
 })
+this.ejDialog.hide();
 }
 onOpenDialogFile = (event: any,value: any): void => {
-  console.log("event",value)
+  this.inputFileName = "";
+  this.selectedOption = "";
   this.idFolder = value;
   this.ejDialogFile.show();
   this.ejDialogFile.width = '400px'; 

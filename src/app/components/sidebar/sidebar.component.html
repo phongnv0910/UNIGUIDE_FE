@@ -26,11 +26,11 @@
       <!-- Navigation -->
       <ul class="navbar-nav" *ngIf="checkToken">
         <li class="nav-item">
-          <a routerLinkActive="active" [routerLink]="['/dashboard']" class="nav-link" (click)="toggleMenuExpansion()">
+          <a routerLinkActive="active" style="margin-bottom:10px" [routerLink]="['/dashboard']" class="nav-link" (click)="toggleMenuExpansion()">
           
             <i class="ni ni-books text-blue"></i>
             <i class="ni" [ngClass]="{'ni-bold-down': isExpanded, 'ni-bold-right': !isExpanded}"></i> 
-            <span class="formf">Note</span>
+            <span class="formf fw-600">Note</span>
             <i class="ni ni-fat-add" style="float: right" id="targetButton" (click)="onOpenDialog($event)"></i>
           </a>
           <!-- <div *ngIf="showTextBox" class="input-group">
@@ -45,7 +45,7 @@
                       <i class="ni" [ngClass]="{'ni-bold-down': menuItem.isExpanded, 'ni-bold-right': !menuItem.isExpanded}"style="margin-right: 10px"></i>
                     </span>
                     <span style="margin-left:5px" class="fs-10">
-                      <i class="ni {{menuItem.icon}}" style="margin-right: 5px;"></i>  <span class="formf"> {{menuItem.title}}</span>
+                      <i class="ni {{menuItem.icon}}" style="margin-right: 5px;"></i>  <span class="formf text-green"> {{menuItem.title}}</span>
                     </span>
                   
                   </a>
@@ -55,7 +55,7 @@
                   <ng-container *ngFor="let submenuItem of menuItem.file">
                     <li class="nav-item">
                       <div class="menu-item-wrapper">
-                        <a [routerLink]="submenuItem.filetype === 'SIMPLE' ? '/normal-form' : (submenuItem.filetype === 'TODOLIST' ? '/form-vipro' : '')" routerLinkActive="active">
+                        <a [routerLink]="submenuItem.filetype === 'SIMPLE' ? '/note' : (submenuItem.filetype === 'TODOLIST' ? '/normal-form' : '')" routerLinkActive="active">
                           <span><i class="ni ni-collection"></i></span>
                           <span style="margin-left: 5px;" class="fs-10">
                             <span class="formf">{{ submenuItem.fileName }}</span>
@@ -72,17 +72,17 @@
         </li>
         <li class="nav-item">
           <a routerLinkActive="active" [routerLink]="['/dashboard']" class="nav-link">
-            <i class="ni ni-pin-3 text-orange"></i> Accommodation
+            <i class="ni ni-pin-3 text-orange"></i> <span class="formf fw-600">Accommodation</span>
           </a>
         </li>
         <li class="nav-item">
-          <a routerLinkActive="active" [routerLink]="['/tables']" class="nav-link">
-            <i class="ni ni-single-02 text-yellow"></i> Club
+          <a routerLinkActive="active" [routerLink]="['/club']" class="nav-link">
+            <i class="ni ni-single-02 text-yellow"></i> <span class="formf fw-600">Club</span>
           </a>
         </li>
         <li class="nav-item">
-          <a routerLinkActive="active" [routerLink]="['/Notifications']" class="nav-link">
-            <i class="ni ni-pin-3 text-orange"></i> Notification
+          <a routerLinkActive="active" [routerLink]="['/notifications']" class="nav-link">
+            <i class="ni ni-pin-3 text-orange"></i> <span class="formf fw-600"> Notification</span>
           </a>
         </li>
       </ul>
@@ -97,6 +97,7 @@
           <input id="inVal" class="e-input formf" type="text" placeholder="Enter your folder name!" (change)="onInputTextChange($event)"/>
           
         </div>
+       
         <div class="button-container">
           <button id="sendButton1" class="e-control e-btn e-secondary sendButton formf" data-ripple="true" (click)="save()">Save</button>
           <button id="sendButton2" class="e-control e-btn e-primary sendButton formf" data-ripple="true" (click)="close()">Cancel</button>
@@ -110,12 +111,12 @@
 <ng-template #content>
   <div class="dialog-content">
     <h4>Create a New File</h4>
-    <input id="inVal2" class="e-input formf" type="text" placeholder="Enter your file name!" (change)="onInputTextChangeFiles($event)"/>
+    <input id="inVal2" value="" class="e-input formf" type="text" placeholder="Enter your file name!" (change)="onInputTextChangeFiles($event)"/>
     
   </div>
  
-</ng-template>
-<ng-template #footerTemplate>
+<!-- </ng-template>
+<ng-template #footerTemplate> -->
   <div class="e-section-control">
       <ul style="display: flex;">
         <li>
@@ -132,6 +133,8 @@
       <li><img class="img20" src="assets\background\temp4.png" /></li>
     </ul>
   </div>
+  <p *ngIf="checkRequiredRadio" style="color:red">You need choosing a options</p>
+  <p *ngIf="checkNameFile" style="color:red">You need input name file</p>
   <div class="button-container">
     <button id="sendButton1" class="e-control e-btn e-secondary sendButton formf" data-ripple="true" (click)="saveFile()">Save</button>
     <button id="sendButton2" class="e-control e-btn e-primary sendButton formf" data-ripple="true" (click)="close()">Cancel</button>
