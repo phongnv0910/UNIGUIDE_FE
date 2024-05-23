@@ -12,10 +12,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule, routes } from './app.routing'; // Import routes
 import { ComponentsModule } from './components/components.module';
-import { NoteComponent } from './pages/note/note.component'; 
+import { NoteComponent } from './pages/note/note.component';
+import { HostelComponent } from './pages/hostel/hostel.component'; 
 import { QuillModule } from 'ngx-quill';
 import { BrowserModule } from '@angular/platform-browser';
 import { ToastAllModule, ToastModule } from '@syncfusion/ej2-angular-notifications';
+import { DialogModule } from '@syncfusion/ej2-angular-popups';
 
 @NgModule({
   imports: [
@@ -26,6 +28,7 @@ import { ToastAllModule, ToastModule } from '@syncfusion/ej2-angular-notificatio
     NgbModule,
     AppRoutingModule,
     BrowserModule,
+    DialogModule,
     QuillModule.forRoot(),
     RouterModule.forRoot(routes, { useHash: false }) // Use the imported routes
   ],
@@ -34,6 +37,7 @@ import { ToastAllModule, ToastModule } from '@syncfusion/ej2-angular-notificatio
     AdminLayoutComponent,
     AuthLayoutComponent,
     NoteComponent,
+    HostelComponent
   ],
   exports: [RouterModule],
   providers: [],

@@ -1,0 +1,28 @@
+<div *ngFor="let hostel of hostels">
+    <div class="form-group col-md-3">
+        <img src="assets/img/theme/club.png" alt="Club Image">
+        <div class="formz">
+            <p class="formf fw-900 fs-25">{{ hostel.ownerName }}</p>
+            <p class="formf fw-600">Address: {{ hostel.address }}</p>
+            <p class="formf fw-600 mg-title">Phone Number: {{ hostel.phoneNumber }}</p>
+            <p class="formf fw-600 mg-title">Existence Time: {{ hostel.existenceTime }}</p>
+            <button class="e-control e-btn" id="targetButton" (click)="onOpenDialog($event)">Nộp đơn</button>
+        </div>
+    </div>
+</div>
+<ejs-dialog #ejDialog [visible]="false" [target]="targetElement" width="500px">
+    <ng-template #content>
+        <div class="dialog-content">
+          <h4>Your Student ID</h4>
+          <input id="inVal" class="e-input formf" type="text" placeholder="Enter your ID!"/>
+          <h4>Your Name</h4>
+          <input id="inVal" class="e-input formf" type="text" placeholder="Enter your Name!"/>
+          <h4>Your Email</h4>
+          <input id="inVal" class="e-input formf" type="text" placeholder="Enter your Email!"/>
+        </div>
+        <div class="button-container">
+          <button id="sendButton1" class="e-control e-btn e-secondary sendButton formf" data-ripple="true" >Save</button>
+          <button style="margin-left: 20px;" id="sendButton2" class="e-control e-btn e-primary sendButton formf" data-ripple="true" (click)="close()">Cancel</button>
+        </div>
+    </ng-template>
+</ejs-dialog>
