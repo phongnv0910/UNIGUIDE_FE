@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DialogModule } from '@syncfusion/ej2-angular-popups';
 import { CheckBoxModule, RadioButtonModule } from '@syncfusion/ej2-angular-buttons';
+import { TextBoxAllModule } from '@syncfusion/ej2-angular-inputs';
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +16,7 @@ import { CheckBoxModule, RadioButtonModule } from '@syncfusion/ej2-angular-butto
     DialogModule,
     CheckBoxModule,
     RadioButtonModule,
+    TextBoxAllModule
   ],
   declarations: [
     FooterComponent,

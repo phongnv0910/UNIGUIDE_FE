@@ -89,35 +89,34 @@
       
       
       
-      <ejs-dialog id='dialog' #ejDialog isModal='true' [visible]="false" (overlayClick)="onOverlayClick" class="formf"
-      [target]='targetElement' width='300px'>
-      <ng-template #content>
-        <div class="dialog-content">
-          <h4>Create a New Folder</h4>
-          <input id="inVal" class="e-input formf" type="text" placeholder="Enter your folder name!" (change)="onInputTextChange($event)"/>
-          
-        </div>
-       
-        <div class="button-container">
-          <button id="sendButton1" class="e-control e-btn e-secondary sendButton formf" data-ripple="true" (click)="save()">Save</button>
-          <button id="sendButton2" class="e-control e-btn e-primary sendButton formf" data-ripple="true" (click)="close()">Cancel</button>
-        </div>
-      </ng-template>
- 
+      <ejs-dialog id='dialog' #ejDialog isModal='true' [visible]="false" (overlayClick)="onOverlayClick()" class="formf"
+  [target]='targetElement' width='300px'>
+  <ng-template #content>
+    <div class="dialog-content">
+      <h4>Create a New Folder</h4>
+      <ejs-textbox
+        placeholder="Enter your folder name!"
+        [(value)]="inputFolderName"
+        (change)="onInputTextChange($event)">
+      </ejs-textbox>
+    </div>
+    <div class="button-container">
+      <button id="sendButton1" class="e-control e-btn e-secondary sendButton formf" data-ripple="true" (click)="save()">Save</button>
+      <button id="sendButton2" class="e-control e-btn e-primary sendButton formf" data-ripple="true" (click)="close()">Cancel</button>
+    </div>
+  </ng-template>
 </ejs-dialog>
 
-<ejs-dialog id='#ejDialogFile' #ejDialogFile isModal='true' [visible]="false" (overlayClick)="onOverlayClick" class="formf"
-[target]='targetElement' width='300px'>
-<ng-template #content>
-  <div class="dialog-content">
-    <h4>Create a New File</h4>
-    <input id="inVal2" value="" class="e-input formf" type="text" placeholder="Enter your file name!" (change)="onInputTextChangeFiles($event)"/>
-    
-  </div>
- 
-<!-- </ng-template>
-<ng-template #footerTemplate> -->
-  <div class="e-section-control">
+
+<ejs-dialog id='ejDialogFile' #ejDialogFile isModal='true' [visible]="false" (overlayClick)="onOverlayClick()" class="formf"
+  [target]='targetElement' width='300px'>
+  <ng-template #content>
+    <div class="dialog-content">
+      <h4>Create a New File</h4>
+      <input id="inVal2" value="" class="e-input formf" type="text" placeholder="Enter your file name!" (change)="onInputTextChangeFiles($event)"/>
+    </div>
+
+    <div class="e-section-control">
       <ul style="display: flex;">
         <li>
           <ejs-radiobutton label="Simple Note" (change)="onSelectedChange($event)" value="SIMPLE" name="default"></ejs-radiobutton>
@@ -126,21 +125,22 @@
           <ejs-radiobutton label="To Do List" (change)="onSelectedChange($event)" value="TODOLIST" name="default"></ejs-radiobutton>
         </li>
       </ul>
-  </div>
-  <div class="e-section-control">
-    <ul style="display: flex;">
-      <li><img class="img20" src="assets\background\temp3.jpg" /></li>
-      <li><img class="img20" src="assets\background\temp4.png" /></li>
-    </ul>
-  </div>
-  <p *ngIf="checkRequiredRadio" style="color:red">You need choosing a options</p>
-  <p *ngIf="checkNameFile" style="color:red">You need input name file</p>
-  <div class="button-container">
-    <button id="sendButton1" class="e-control e-btn e-secondary sendButton formf" data-ripple="true" (click)="saveFile()">Save</button>
-    <button id="sendButton2" class="e-control e-btn e-primary sendButton formf" data-ripple="true" (click)="close()">Cancel</button>
-  </div>
-</ng-template>
+    </div>
+    <div class="e-section-control">
+      <ul style="display: flex;">
+        <li><img class="img20" src="assets/background/temp3.jpg" /></li>
+        <li><img class="img20" src="assets/background/temp4.png" /></li>
+      </ul>
+    </div>
+    <p *ngIf="checkRequiredRadio" style="color:red">You need to choose an option</p>
+    <p *ngIf="checkNameFile" style="color:red">You need to input a file name</p>
+    <div class="button-container">
+      <button id="sendButton1" class="e-control e-btn e-secondary sendButton formf" data-ripple="true" (click)="saveFile()">Save</button>
+      <button id="sendButton2" class="e-control e-btn e-primary sendButton formf" data-ripple="true" (click)="close()">Cancel</button>
+    </div>
+  </ng-template>
 </ejs-dialog>
+
 
         <!-- <ng-container *ngFor="let menuItem of menuItems">
           <li class="{{menuItem.class}} nav-item" *ngIf="menuItem.parentid === null">

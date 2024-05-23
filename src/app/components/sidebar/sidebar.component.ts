@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { Folder } from 'src/core/models/database/db.model';
@@ -8,7 +8,7 @@ import { ObjectType } from 'src/core/ultils/constaints';
 import { EmitType } from '@syncfusion/ej2-base';
 import { UserLogged } from 'src/core/ultils/userLogged';
 import { NgForm } from '@angular/forms';
-// Mở rộng giao diện RouteInfo để hỗ trợ submenu
+
 declare interface RouteInfo {
   id: number;
   objectId?: number;
@@ -24,21 +24,11 @@ declare interface RouteInfo {
   file?: Array<any>;
 }
 
-
 export const ROUTES: RouteInfo[] = [
-  { id: 2, objectType: ObjectType.folder,path: '/note', title: 'Note',  icon: 'ni-tv-2 text-primary', class: 'formz',hasSubmenu:true, parentid : null},
-
-  
-  { id: 4, path: '/maps', title: 'Accomodation',  icon:'ni-pin-3 text-orange', class: 'formz' ,hasSubmenu:false, parentid : null},
-  { id: 5, path: '', title: 'Restaurant',  icon:'ni-single-02 text-yellow', class: 'formz' ,hasSubmenu:false, parentid : null},
-//   { id: 6,path: '', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' ,hasSubmenu:true, parentid : 5},
-//   { id: 7,path: '', title: 'Login',  icon:'ni-key-25 text-info', class: '', hasSubmenu:true, parentid : null},
-//   { id: 8,path: '', title: 'Register',  icon:'ni-circle-08 text-pink', class: '' ,hasSubmenu:true, parentid : 5},
-// ];
-// export const ROUTES: Menu[] = [
-//   { id: 1, title: 'Note', routerLink: null, href: null, icon: 'th-list', target: null, hasSubMenu: true, parentId: 0, roles: null, routeKey: 'danhmuc' },
-//   { id: 10, title: 'Dashboard', routerLink: '/dardshboa', href: null, icon: 'building', target: null, hasSubMenu: false, parentId: 1, routeKey: 'dashboard' },
- ]
+  { id: 2, objectType: ObjectType.folder, path: '/note', title: 'Note', icon: 'ni-tv-2 text-primary', class: 'formz', hasSubmenu: true, parentid: null },
+  { id: 4, path: '/maps', title: 'Accomodation', icon: 'ni-pin-3 text-orange', class: 'formz', hasSubmenu: false, parentid: null },
+  { id: 5, path: '', title: 'Restaurant', icon: 'ni-single-02 text-yellow', class: 'formz', hasSubmenu: false, parentid: null },
+];
 
 @Component({
   selector: 'app-sidebar',
@@ -46,81 +36,72 @@ export const ROUTES: RouteInfo[] = [
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
-  public isExpanded : boolean = false;
-  inputFolderName : any;
-  inputFileName : any;
+  public isExpanded: boolean = false;
+  inputFolderName: string = "";
+  inputFileName: any = "";
   public menuItems: any[];
   public isCollapsed = true;
-  idFolder : any;
+  idFolder: any;
   boldIconUp = true;
   showTextBox: boolean = false;
-  isExpandChild : boolean = false;
-  public listFolders : Folder;
-  public checkRequiredRadio : boolean = false;
-  public checkNameFolder : boolean = false;
-  public checkNameFile : boolean = false;
+  isExpandChild: boolean = false;
+  public listFolders: Folder;
+  public checkRequiredRadio: boolean = false;
+  public checkNameFolder: boolean = false;
+  public checkNameFile: boolean = false;
   public checkToken = false;
   public selectedOption: any;
   public userLogged = new UserLogged();
-  public listFile : Array<any>=[];
-   @ViewChild('ejDialog') ejDialog: DialogComponent | any;
-   @ViewChild('ejDialogFile') ejDialogFile: DialogComponent | any;
-  // @ViewChild('container', { read: ElementRef, static: true }) container: ElementRef | any;
+  public listFile: Array<any> = [];
+  @ViewChild('ejDialog') ejDialog: DialogComponent | any;
+  @ViewChild('ejDialogFile') ejDialogFile: DialogComponent | any;
   public targetElement?: HTMLElement;
-  constructor(private router: Router,
-  private serviceFolder : FolderService,
-  private serviceFile : FileService 
-  ) { }
+
+  constructor(private router: Router, private serviceFolder: FolderService, private serviceFile: FileService) { }
 
   ngOnInit() {
-    console.log("menu",this.menuItems)
-    if(this.userLogged.getToken() == ""){
+    if (this.userLogged.getToken() === "") {
       this.checkToken = false;
-    }
-    else{
+    } else {
       this.checkToken = true;
     }
-   // this.initilaizeTarget();
     this.loadService();
     this.menuItems = ROUTES.filter(menuItem => menuItem);
     this.router.events.subscribe((event) => {
       this.isCollapsed = false;
-   });
+    });
   }
-  // public initilaizeTarget: EmitType<object> = () => {
-  //   this.targetElement = this.container.nativeElement.parentElement;
-  // }
+
   toggleIconStyle() {
     this.boldIconUp = !this.boldIconUp;
   }
-  loadService(){
+
+  loadService() {
     this.serviceFolder.getAllFolder().subscribe((data) => {
       this.listFolders = data.data;
       for (let index = 0; index < data.data.length; index++) {
         const folderName = this.listFolders[index].folderName;
         const folder = this.listFolders[index];
-        console.log(folder.filenotes)
         const menuItem = this.menuItems.find(item => item.path === '/' + folderName);
         if (menuItem) {
-          menuItem.folderName = folderName; 
+          menuItem.folderName = folderName;
         } else {
           const newMenuItem: RouteInfo = {
             id: this.menuItems.length + 100,
-  objectType: null,
-  objectId: this.listFolders[index]?.folderId, 
-  path: '/' + folderName,
-  title: folderName,
-  icon: 'ni-bullet-list-67',
-  class: 'formz fs-10',
-  hasSubmenu: false,
-  isChildExpand: true,
-  parentid: 2,
-  isExpanded: false, 
-  file: folder?.filenotes
+            objectType: null,
+            objectId: this.listFolders[index]?.folderId,
+            path: '/' + folderName,
+            title: folderName,
+            icon: 'ni-bullet-list-67',
+            class: 'formz fs-10',
+            hasSubmenu: false,
+            isChildExpand: true,
+            parentid: 2,
+            isExpanded: false,
+            file: folder?.filenotes
           };
-          
-          this.menuItems.push(newMenuItem); 
-          console.log("newMenuItem",newMenuItem)
+
+          this.menuItems.push(newMenuItem);
         }
       }
     });
@@ -129,19 +110,26 @@ export class SidebarComponent implements OnInit {
   toggleTextBox() {
     this.showTextBox = !this.showTextBox;
   }
+
   toggleMenuExpansion() {
-     this.isExpanded = !this.isExpanded;
+    this.isExpanded = !this.isExpanded;
   }
+
   public onOverlayClick: EmitType<object> = () => {
     this.ejDialog.hide();
-}
-submitForm(form: NgForm): void  {
-  console.log("form",form.value);
-}
-close(){
-  this.ejDialog.hide();
-  this.ejDialogFile.hide();
-}
+    this.clearDialogData();
+  }
+
+  submitForm(form: NgForm): void {
+    console.log("form", form.value);
+  }
+
+  close() {
+    this.ejDialog.hide();
+    this.ejDialogFile.hide();
+    this.clearDialogData();
+  }
+
   toggleSubMenuExpansions(menuItem: any) {
     this.refreshFile();
     this.menuItems.forEach(item => {
@@ -149,21 +137,26 @@ close(){
         item.isExpanded = false;
       }
     });
-    
+
     menuItem.isExpanded = !menuItem.isExpanded;
   }
-  getValueCol(value : any){
-    console.log("value in plus",value)
+
+  getValueCol(value: any) {
+    console.log("value in plus", value);
   }
+
   onInputTextChange(event: any) {
-   this.inputFolderName = event.target.value;
+    this.inputFolderName = event.target.value;
   }
+
   onInputTextChangeFiles(event: any) {
     this.inputFileName = event.target.value;
   }
-   onSelectedChange(event: any) {
-     this.selectedOption = event.value;
-   }
+
+  onSelectedChange(event: any) {
+    this.selectedOption = event.value;
+  }
+
   public onOpenDialog = (event: any): void => {
     this.ejDialog.show();
     this.ejDialog.animationSettings = {
@@ -171,70 +164,73 @@ close(){
       duration: 100,
       delay: 0,
     };
-};
-saveFile(){
-console.log("selectedoptons",this.selectedOption);
-  if(this.selectedOption == null){
-    this.checkRequiredRadio = true;
   }
-  if(this.inputFileName == ""){
-    this.checkNameFile = true;
-  }
-  if(this.checkNameFile == false && this.checkRequiredRadio == false){
-  let form = {
-    fileName : this.inputFileName,
-    typeFile : this.selectedOption,
-    folderId : this.idFolder
-    
-  }
- 
-  this.serviceFile.createFile(form).subscribe((data) => {
-    console.log(data);
-    this.refreshFile();
-    let form = {
-      fileName : "",
-      typeFile : "",
-      folderId : null
+
+  saveFile() {
+    if (this.selectedOption == null) {
+      this.checkRequiredRadio = true;
     }
-  
-  })
-  this.inputFileName = "";
-  this.selectedOption = "";
-  this.ejDialogFile.hide();
-}
-}
-refreshFile(){
-  
-  if(this.idFolder){
-    this.serviceFile.getFileByIdFolder(this.idFolder).subscribe((data) => {
-    
-    })
+    if (this.inputFileName == "") {
+      this.checkNameFile = true;
+    }
+    debugger
+    console.log(this.selectedOption);
+    console.log(this.inputFileName);
+    if (this.checkNameFile == false && this.checkRequiredRadio == false) {
+      let form = {
+        fileName: this.inputFileName,
+        typeFile: this.selectedOption,
+        folderId: this.idFolder
+      }
+
+      this.serviceFile.createFile(form).subscribe((data) => {
+        this.refreshFile();
+        this.clearDialogData();
+      });
+      this.refreshFile();
+      this.ejDialogFile.hide();
+      this.clearDialogData();
+    }
   }
-}
-save(){
-let formData =  {
-  folderName : this.inputFolderName
-}
-this.serviceFolder.createFolder(formData).subscribe((data) => {
-  console.log(data);
-  this.loadService();
-  this.ejDialog.hide();
-  this.inputFolderName = "";
-})
-this.ejDialog.hide();
-}
-onOpenDialogFile = (event: any,value: any): void => {
-  this.inputFileName = "";
-  this.selectedOption = "";
-  this.idFolder = value;
-  this.ejDialogFile.show();
-  this.ejDialogFile.width = '400px'; 
 
-  this.ejDialogFile.animationSettings = {
-    effect: 'Fade',
-    duration: 100,
-    delay: 0,
-  };
-};
+  refreshFile() {
+    if (this.idFolder) {
+      this.serviceFile.getFileByIdFolder(this.idFolder).subscribe((data) => {
+        // handle response
+      })
+    }
+  }
 
+  save() {
+    let formData = {
+      folderName: this.inputFolderName
+    }
+    this.serviceFolder.createFolder(formData).subscribe((data) => {
+      this.loadService();
+      this.ejDialog.hide();
+      this.clearDialogData();
+    });
+    debugger
+    this.loadService();
+    this.ejDialog.hide();
+    this.clearDialogData();
+  }
+
+  onOpenDialogFile = (event: any, value: any): void => {
+    this.clearDialogData();
+    this.idFolder = value;
+    this.ejDialogFile.show();
+    this.ejDialogFile.width = '400px';
+    this.ejDialogFile.animationSettings = {
+      effect: 'Fade',
+      duration: 100,
+      delay: 0,
+    };
+  }
+
+  private clearDialogData() {
+    this.inputFolderName = "";
+    this.inputFileName = "";
+    this.selectedOption = "";
+  }
 }
