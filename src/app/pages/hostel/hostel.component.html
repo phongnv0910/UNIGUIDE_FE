@@ -1,5 +1,12 @@
-<div *ngFor="let hostel of hostels">
-    <div class="form-group col-md-3">
+<div class="header pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="header-body">
+            <!-- Card stats -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+
+    <div class="form-group col-md-3" *ngFor="let hostel of hostels">
         <img src="assets/img/theme/club.png" alt="Club Image">
         <div class="formz">
             <p class="formf fw-900 fs-25">{{ hostel.ownerName }}</p>
@@ -8,8 +15,15 @@
             <p class="formf fw-600 mg-title">Existence Time: {{ hostel.existenceTime }}</p>
             <button class="e-control e-btn" id="targetButton" (click)="onOpenDialog($event)">Nộp đơn</button>
         </div>
+  
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
 <ejs-dialog #ejDialog [visible]="false" [target]="targetElement" width="500px">
     <ng-template #content>
         <div class="dialog-content">

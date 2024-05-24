@@ -5,17 +5,17 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="form-group col-md-3">
-                            <img src="assets/img/theme/club.png" alt="Club Image">
+                        <div class="form-group col-md-3" *ngFor="let club of listClub">
+                            <img src="{{club.urlImg}}" alt="Club Image">
                             <div class="formz">
-                                <p class="formf fw-900 fs-25">Muay Thai</p>
-                                <p class="formf fw-600">Vị trí: Ban Tổ chức && ban chuyên môn</p>
-                                <p class="formf fw-600 mg-title">Ngày nộp đơn: 30/5 - 3/6</p>
-                                <p class="formf fw-600 mg-title">Ngày phỏng vấn: 7/6 - 10/6</p>
+                                <p class="formf fw-900 fs-25">{{ club.name }}</p>
+                                <p class="formf fw-600">Vị trí: {{club.positions}}</p>
+                                <p class="formf fw-600 mg-title">Ngày nộp đơn: {{club.dateProcedure}}</p>
+                                <p class="formf fw-600 mg-title">Ngày phỏng vấn: {{club.dateInterview}}</p>
                                 <button class="e-control e-btn" id="targetButton" (click)="onOpenDialog($event)">Nộp đơn</button>
                             </div>
                         </div>
-                        <div class="form-group col-md-3">
+                        <!-- <div class="form-group col-md-3">
                             <img src="assets/img/theme/club.png" alt="Club Image"  class="sha-img">
                             <div class="formz">
                                 <p class="formf fw-900 fs-25">Múa</p>
@@ -45,7 +45,7 @@
                                 <p class="formf fw-600 mg-title">Ngày phỏng vấn: 7/6 - 10/6</p>
                                 <button class="e-control e-btn" id="targetButton" (click)="onOpenDialog($event)">Nộp đơn</button>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
