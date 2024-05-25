@@ -8,13 +8,14 @@ import { NotificationsComponent } from 'src/app/pages/notifications/notification
 import { FormViproComponent } from 'src/app/pages/form-vipro/form-vipro.component';
 import { ClubComponent } from 'src/app/pages/club/club.component';
 import { HostelComponent } from 'src/app/pages/hostel/hostel.component';
+
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
     { path: 'user-profile',   component: UserProfileComponent },
-    { path: 'note',          component: NoteComponent },
-    { path: 'normal-form',           component: NormalFormComponent },
-    { path: 'notifications',          component: NotificationsComponent },
-    { path: 'form-vipro',          component: FormViproComponent },
-    { path: 'club',          component: ClubComponent },
-    { path: 'hostel',          component: HostelComponent },
+    { path: 'note/:noteId',   component: NoteComponent },
+    { path: 'normal-form/:formId', component: NormalFormComponent },  // Corrected to accept an ID parameter
+    { path: 'notifications',  component: NotificationsComponent },
+    { path: 'form-vipro',     component: FormViproComponent },
+    { path: 'club',           component: ClubComponent },
+    { path: 'hostel',         component: HostelComponent },
 ];

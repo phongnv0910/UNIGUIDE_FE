@@ -55,7 +55,7 @@
                   <ng-container *ngFor="let submenuItem of menuItem.file">
                     <li class="nav-item">
                       <div class="menu-item-wrapper">
-                        <a [routerLink]="submenuItem.filetype === 'SIMPLE' ? '/note' : (submenuItem.filetype === 'TODOLIST' ? '/normal-form' : '')" routerLinkActive="active">
+                        <a [routerLink]="submenuItem.filetype === 'SIMPLE' ? '/note/' + submenuItem.fileId : (submenuItem.filetype === 'TODOLIST' ? '/normal-form/' + submenuItem.fileId : '')" routerLinkActive="active">
                           <span><i class="ni ni-collection"></i></span>
                           <span style="margin-left: 5px;" class="fs-10">
                             <span class="formf">{{ submenuItem.fileName }}</span>

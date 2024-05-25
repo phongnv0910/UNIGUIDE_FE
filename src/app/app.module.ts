@@ -18,6 +18,8 @@ import { QuillModule } from 'ngx-quill';
 import { BrowserModule } from '@angular/platform-browser';
 import { ToastAllModule, ToastModule } from '@syncfusion/ej2-angular-notifications';
 import { DialogModule } from '@syncfusion/ej2-angular-popups';
+import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
+import { TextBoxAllModule } from '@syncfusion/ej2-angular-inputs';
 
 @NgModule({
   imports: [
@@ -29,6 +31,8 @@ import { DialogModule } from '@syncfusion/ej2-angular-popups';
     AppRoutingModule,
     BrowserModule,
     DialogModule,
+    TextBoxAllModule,
+    RichTextEditorModule,
     QuillModule.forRoot(),
     RouterModule.forRoot(routes, { useHash: false }) // Use the imported routes
   ],

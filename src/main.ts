@@ -23,7 +23,7 @@ import { environment } from './environments/environment';
 import { registerLicense } from '@syncfusion/ej2-base';
 
 registerLicense(
-  'Ngo9BigBOggjHTQxAR8/V1NBaF1cXmhMYVFzWmFZfVpgd19HZlZTQ2YuP1ZhSXxXdkBiUX9dcXJXQWRaVU0='
+  'Ngo9BigBOggjHTQxAR8/V1NBaF1cXmhPYVFyWmFZfVpgd19CaFZTQGYuP1ZhSXxXdkBhXH9ddHxXQ2dfV0c='
 );
 
 if (environment.production) {

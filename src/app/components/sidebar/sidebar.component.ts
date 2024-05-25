@@ -70,6 +70,7 @@ export class SidebarComponent implements OnInit {
     this.router.events.subscribe((event) => {
       this.isCollapsed = false;
     });
+  //  console.log(me)
   }
 
   toggleIconStyle() {
@@ -102,6 +103,7 @@ export class SidebarComponent implements OnInit {
           };
 
           this.menuItems.push(newMenuItem);
+          console.log(this.menuItems)
         }
       }
     });

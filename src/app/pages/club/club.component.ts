@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { EmitType } from '@syncfusion/ej2-base';
 import { ClubService } from 'src/core/services/club.service';
+import { UnversityService } from 'src/core/services/unversity.service';
 @Component({
   selector: 'app-club',
   templateUrl: './club.component.html',
@@ -21,7 +22,7 @@ export class ClubComponent implements OnInit {
     this.targetElement = this.container.nativeElement.parentElement;
   };
   public targetElement?: HTMLElement;
-  constructor(private readonly service : ClubService) { }
+  constructor(private readonly service : ClubService,private serviceU : UnversityService) { }
   // public initilaizeTarget: EmitType<object> = () => {
   //   this.targetElement = this.container.nativeElement.parentElement;
   // }
@@ -39,6 +40,14 @@ loadClub(){
   this.service.getClub().subscribe((data)=>{
     console.log("data res",data.data);
     this.listClub = data.data
+  })
+}
+getaaa(value: any){
+  debugger;
+  console.log(value);
+  debugger;
+  this.serviceU.getAllUniversity().subscribe((data)=>{
+    console.log("data res",data.data);
   })
 }
 }

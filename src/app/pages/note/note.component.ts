@@ -1,18 +1,20 @@
-import { Component, OnInit ,ChangeDetectorRef} from '@angular/core';
-import { NoteService } from 'src/core/services/note/note.service';
-import { ToastrService } from 'ngx-toastr';
-import { ChatService } from 'src/core/services/chat/chat.service'; // Import the ChatService
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { SignalRService } from 'src/core/services/signalr.service';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-note',
   templateUrl: './note.component.html',
   styleUrls: ['./note.component.scss']
 })
-export class NoteComponent implements OnInit {
-  noteContent: string = '';
-  chatMessages: any[] = []; // Add chatMessages array
-  userInput: string = ''; // Add userInput string
-
+export class NoteComponent implements OnInit, OnDestroy {
+  noteContent: string;
+  private fileId =  this.route.snapshot.paramMap.get('noteId');
+  private routeSub: Subscription;
+  private timeoutId: any;
+  private isConnected: boolean = false;
+  @ViewChild('quillEditor') quillEditor: any;
   editorConfig = {
     toolbar: [
       ['bold', 'italic', 'underline'],
@@ -23,61 +25,55 @@ export class NoteComponent implements OnInit {
       ['clean']
     ]
   };
-
   constructor(
-    private noteService: NoteService,
-    private toastService: ToastrService,
-    private chatService: ChatService, // Inject the ChatService
-    private cdr: ChangeDetectorRef
+    private signalRService: SignalRService,
+    private route: ActivatedRoute
   ) {}
-
   ngOnInit() {
-  
+    console.log("fileid",this.fileId);
+    debugger;
+    this.routeSub = this.route.queryParams.subscribe(params => {
+     // this.fileId = params['fileid'];
+      if (this.fileId) {
+        this.signalRService.startConnection(this.fileId).then(() => {
+          this.isConnected = true;
+          this.signalRService.listenForMessages((message: string) => {
+            this.noteContent = message;
+          });
+        }).catch(error => {
+          console.error('Error starting SignalR connection:', error);
+        });
+      }
+    });
   }
   onEditorCreated(editor) {
-    const savedNote = localStorage.getItem('savedNote');
+    console.log("note",this.noteContent)
+    const savedNote = this.noteContent;
 
     if (savedNote) {
       editor.clipboard.dangerouslyPasteHTML(savedNote);
     }
   }
-  // onEditorCreated(editor) {
-  //   const savedNote = localStorage.getItem('savedNote');
-  //   console.log('this is first log'+savedNote)
-
-  //   if (savedNote) {
-  //     console.log('this is log'+savedNote)
-  //     this.noteContent = savedNote;
-  //   }
-  // }
-
-  saveNote() {
-    const formData = { content: this.noteContent };
-
-    this.noteService.note(formData).subscribe({
-      next: response => {
-        console.log('Response from server:', response);
-        this.toastService.success("Note submitted successfully!");
-      },
-      error: error => {
-        console.error('Error:', error);
-        this.toastService.error("There was an error submitting your note. Please try again.");
+  onInput(): void {
+    clearTimeout(this.timeoutId);
+    this.timeoutId = setTimeout(() => {
+      debugger;
+      if (this.isConnected) {
+        this.signalRService.sendMessage(this.noteContent, parseInt(this.fileId));
+      } else {
+        console.error('SignalR connection is not in the Connected state.');
       }
-    });
-
-    // Lưu nội dung ghi chú vào localStorage sau khi gửi lên server
-    localStorage.setItem('savedNote', this.noteContent);
-    console.log('Note content saved:', this.noteContent);
+    }, 300);
   }
-
-  closeChat() {
-    // Implement the logic to close the chat here
-    console.log('Closing chat...');
-  }
-
+  
   onNoteContentChange(event: any) {
     // Lưu nội dung ghi chú vào localStorage
     localStorage.setItem('savedNote', this.noteContent);
-    console.log('Note content saved:', this.noteContent);
+     console.log('Note content saved:', this.noteContent);
+  }
+  ngOnDestroy(): void {
+    if (this.routeSub) {
+      this.routeSub.unsubscribe();
+    }
   }
 }

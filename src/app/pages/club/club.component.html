@@ -56,7 +56,7 @@
     <ng-template #content>
         <div class="dialog-content">
           <h4>Your Student ID</h4>
-          <input id="inVal" class="e-input formf" type="text" placeholder="Enter your ID!"/>
+          <input id="inVal" class="e-input formf" type="text" placeholder="Enter your ID!" (change)="getaaa($event)"/>
           <h4>Your Name</h4>
           <input id="inVal" class="e-input formf" type="text" placeholder="Enter your Name!"/>
           <h4>Your Email</h4>
@@ -64,7 +64,7 @@
           
         </div>
         <div class="button-container">
-          <button id="sendButton1" class="e-control e-btn e-secondary sendButton formf" data-ripple="true" >Save</button>
+          <button id="sendButton1" class="e-control e-btn e-secondary sendButton formf" data-ripple="true" (click)="close()">Save</button>
           <button style="margin-left: 20px;" id="sendButton2" class="e-control e-btn e-primary sendButton formf" data-ripple="true" (click)="close()">Cancel</button>
         </div>
     </ng-template>
