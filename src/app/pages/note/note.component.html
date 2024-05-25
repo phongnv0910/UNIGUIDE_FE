@@ -2,15 +2,7 @@
   <div class="container-fluid">
     <div class="header-body">
       <h2>Write Your Note</h2>
-      <quill-editor
-      [(ngModel)]="noteContent"
-      [modules]="editorConfig"
-      class="wide-quill-editor"
-      (ngModelChange)="onNoteContentChange($event)"
-      (onEditorCreated)="onEditorCreated($event)"
-      >
-      </quill-editor
-      >
+      <quill-editor [(ngModel)]="noteContent" (onContentChanged)="onInput()" class="wide-quill-editor"> </quill-editor>
     </div>
   </div>
 </div>
