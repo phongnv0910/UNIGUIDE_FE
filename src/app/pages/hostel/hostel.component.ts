@@ -61,4 +61,13 @@ export class HostelComponent implements OnInit {
     close(){
       this.ejDialog.hide();
     }
+    openGoogleMaps(googleMapAddress: string): void {
+        const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${googleMapAddress}`;
+        window.open(googleMapsUrl, '_blank');
+    }
+    
+    
+    
+    
+    
 }
