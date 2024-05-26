@@ -4,6 +4,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Subscription } from "rxjs";
 import * as signalR from "@microsoft/signalr";
 import { QuillEditorComponent } from 'ngx-quill';
+
 @Component({
   selector: "app-note",
   templateUrl: "./note.component.html",
@@ -17,7 +18,9 @@ export class NoteComponent implements OnInit, OnDestroy {
   private timeoutId: any;
   private isConnected: boolean = false;
   private connection: signalR.HubConnection;
+
   @ViewChild(QuillEditorComponent) quillEditor: QuillEditorComponent;
+
   constructor(
     private signalRService: SignalRService,
     private route: ActivatedRoute
@@ -42,10 +45,17 @@ export class NoteComponent implements OnInit, OnDestroy {
 
       this.connection.on("ReceiveMessage", (message) => {
         console.log("message", message);
-        this.noteContent = message;
+        this.updateEditorContent(message);
       });
     }
   }
+
+  updateEditorContent(savedNote: string) {
+    if (this.quillEditor && this.quillEditor.quillEditor) {
+      this.quillEditor.quillEditor.clipboard.dangerouslyPasteHTML(savedNote);
+    }
+  }
+
   onInput1(): void {
     this.noteContentBuffer = this.quillEditor.quillEditor.root.innerHTML; 
     console.log("22222222", this.noteContentBuffer);
@@ -69,15 +79,15 @@ export class NoteComponent implements OnInit, OnDestroy {
         .catch(err => console.error('err sending : ' + err));
     }, 600);
   }
-  
+
   onInput(args: any): void {
     let dataMessage = {
       Id: this.fileId,
       content: args.html
-  };
+    };
 
-  const jsonString = JSON.stringify(dataMessage); // Convert object to JSON string
-  console.log('JSON String:', jsonString);
+    const jsonString = JSON.stringify(dataMessage); // Convert object to JSON string
+    console.log('JSON String:', jsonString);
   }
 
   ngOnDestroy(): void {

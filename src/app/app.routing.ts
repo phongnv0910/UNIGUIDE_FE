@@ -10,11 +10,11 @@ import { NotFoundError } from 'rxjs';
 import { NormalFormComponent } from './pages/normal-form/normal-form.component';
 
 const routes: Routes =[
-  //{
-   // path: '',
-   // redirectTo: 'dashboard',
-   // pathMatch: 'full',
- // },
+  {
+   path: '',
+   redirectTo: 'dashboard',
+   pathMatch: 'full',
+ },
   {
     path: '',
     component: AdminLayoutComponent,

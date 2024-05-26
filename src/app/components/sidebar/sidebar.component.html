@@ -1,4 +1,12 @@
-<nav class="navbar navbar-vertical navbar-expand-md navbar-light bg-white" id="sidenav-main">
+
+<div *ngIf="!checkToken" style="margin-top:25px; margin-left: 20px;">
+  <a class="navbar-brand pt-0" routerLinkActive="active" [routerLink]="['/dashboard']" style="display: flex; align-items: center;">
+    <img src="./assets/img/theme/notion.jpg" class="navbar-brand-img" alt="..." style="max-height: 40px; margin-right: 0px;">
+    <p class="wordmark_fill__RZFeq" style="margin: 0; font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 600; color: #333;">UNI GUIDE</p>
+</a>
+
+</div>
+<nav class="navbar navbar-vertical navbar-expand-md navbar-light bg-white" id="sidenav-main" *ngIf="checkToken">
   <div class="container-fluid">
     <!-- Toggler -->
     <!-- <button class="navbar-toggler" type="button" (click)="isCollapsed=!isCollapsed"
