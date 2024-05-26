@@ -20,7 +20,7 @@ import { ToastAllModule, ToastModule } from '@syncfusion/ej2-angular-notificatio
 import { DialogModule } from '@syncfusion/ej2-angular-popups';
 import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
 import { TextBoxAllModule } from '@syncfusion/ej2-angular-inputs';
-
+import { ToolbarService, LinkService, ImageService, HtmlEditorService, QuickToolbarService } from '@syncfusion/ej2-angular-richtexteditor';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -44,7 +44,7 @@ import { TextBoxAllModule } from '@syncfusion/ej2-angular-inputs';
     HostelComponent
   ],
   exports: [RouterModule],
-  providers: [],
+  providers: [ToolbarService, LinkService, ImageService, HtmlEditorService, QuickToolbarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

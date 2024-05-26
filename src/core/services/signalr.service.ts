@@ -20,21 +20,18 @@ export class SignalRService {
     debugger;
     return this.hubConnection
       .start()
-      .then(() => this.hubConnection.invoke("AddToGroup", this.fileId))
+      .then(() => this.hubConnection.invoke("AddToGroup", this.fileId, "simplenote"))
       .catch(err => console.error('err starting: ' + err));
   }
 
   public listenForMessages(callback: (message: string) => void): void {
-    
     this.hubConnection.on("ReceiveMessage", callback);
   }
 
 
 
   public sendMessage(note: string, file: number): void {
-    // if (this.hubConnection.state === signalR.HubConnectionState.Connected) {
     console.log('333333', file);
-    // const notes = note;
     let dataMessage = {
         Id: file,
         content: note

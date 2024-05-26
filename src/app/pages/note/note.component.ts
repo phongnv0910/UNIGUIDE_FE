@@ -61,4 +61,24 @@ export class NoteComponent implements OnInit, OnDestroy {
     }
   }
   
+  onNoteContentChange(event: any) {
+    const savedNote = this.noteContent;
+    console.log('Saved note:', savedNote);
+    localStorage.setItem('savedNote', savedNote);
+  
+    if (this.isConnected) {
+      this.signalRService.sendMessage(this.noteContent, parseInt(this.fileId));
+    } else {
+      console.error('error');
+    }
+  }
+  
+  onEditorCreated(editor) {
+    const savedNote = localStorage.getItem('savedNote');
+
+    if (savedNote) {
+      editor.clipboard.dangerouslyPasteHTML(savedNote);
+    }
+  }
+   
 }
