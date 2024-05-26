@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EditSettingsModel, ToolbarItems } from '@syncfusion/ej2-angular-grids';
+import { NotificationsService } from 'src/core/services/notifications.service';
 
 @Component({
   selector: 'app-notifications',
@@ -125,10 +126,18 @@ export class NotificationsComponent implements OnInit {
 ,];
 
   public data?: object[];
-
+  public listNotification?: Array<any> =[];
   ngOnInit(): void {
     this.toolbarOptions = ['Add', 'Edit', 'Delete'];
-      this.data = this.categoryData;
+   this.getNotifi();
+  }
+  constructor(private readonly service : NotificationsService){}
+
+  getNotifi(){
+    this.service.getNotifications().subscribe((data)=>{
+      this.listNotification = data.data;
+
+    })
   }
 }
 

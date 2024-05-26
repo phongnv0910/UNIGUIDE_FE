@@ -47,7 +47,7 @@ export class FormViproComponent implements OnInit {
   public data?: object[];
   public data1?: object[];
   ngOnInit(): void {
-    this.toolbarOptions = ['Add', 'Edit', 'Delete'];
+    this.toolbarOptions = ['Edit'];
       this.data = this.categoryData;
       this.data1 = this.tailieu;
   }

@@ -19,14 +19,27 @@ export class SignalRService {
     this.fileId = fileId;
     debugger;
     return this.hubConnection
-      .start()
-      .then(() => this.hubConnection.invoke("AddToGroup", this.fileId, "simplenote"))
-      .catch(err => console.error('err starting: ' + err));
+    .start()
+    .then(() => {
+      console.log('000000000000');
+      return this.hubConnection.invoke("AddToGroup", this.fileId, "simplenote");
+    })
+    // .then(() => {
+    //   // Thực hiện các công việc khác sau khi invoke("AddToGroup") hoàn thành
+    //   console.log('Successfully added to group.');
+    //   // Gọi logic tiếp theo tại đây nếu cần
+    // })
+    .catch(err => console.error('Error starting or adding to group:', err));
+  
   }
 
-  public listenForMessages(callback: (message: string) => void): void {
-    this.hubConnection.on("ReceiveMessage", callback);
-  }
+  onReceiveMessage(message : any): void {
+   
+    this.hubConnection.on("ReceiveMessage", function (x) {
+      console.log("messageee ne0",x);
+    })
+}
+  
 
 
 

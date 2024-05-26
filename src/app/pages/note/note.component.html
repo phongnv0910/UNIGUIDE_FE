@@ -1,20 +1,34 @@
-<div class="header pb-8 pt-5 pt-md-8">
+ <div class="header pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
       <h2>Write Your Note</h2>
-      <quill-editor [(ngModel)]="noteContent" (onContentChanged)="onInput()" class="wide-quill-editor"> </quill-editor>
+      <quill-editor [(ngModel)]="noteContent" (onContentChanged)="onInput1()" class="wide-quill-editor"> </quill-editor>
     </div>
   </div>
-</div>
+</div> 
 <!-- <div class="header pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
       <h2>Write Your Note</h2>
-      <ejs-richtexteditor id="defaultRTE" [toolbarSettings]='tools'>
+      <ejs-richtexteditor id="defaultRTE" [toolbarSettings]='tools' (input)="onInput($event)">
         <ng-template #valueTemplate>
-          <p>{{noteContent}}</p>
+          <ejs-textbox
+            [value]="noteContent"
+            (ngModelChange)="onInput($event)"
+          >
+          </ejs-textbox>
         </ng-template>
       </ejs-richtexteditor>
     </div>
   </div>
 </div> -->
+
+<!-- <div class="header pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <h2>Write Your Note</h2>
+      <quill-editor [(ngModel)]="noteContent" (onContentChanged)="onInput($event)" class="wide-quill-editor"> </quill-editor>
+    </div>
+  </div>
+</div>  -->
+<!-- (onContentChanged)="onInput($event)"  -->

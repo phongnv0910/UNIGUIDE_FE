@@ -16,26 +16,29 @@
   <div class="row"></div>
   <div class="card-body">
     <ejs-grid [dataSource]='data' [toolbar]="toolbarOptions"
-      [allowFiltering]="true"
-      gridLines="Both"
-      [allowSorting]="true"
-      [allowPaging]="true"
-      [editSettings]="editSettings">
-        <e-columns>
-            <e-column headerText='Status' width='150' textAlign='Center'>
-              <ng-template #template let-data>
-                <div *ngIf="data.Discontinued; else elseblock">
-                     <input type="checkbox" checked>
-                </div>
-              </ng-template>
-              <ng-template #elseblock><input type="checkbox"></ng-template>
-              <ng-template #editTemplate></ng-template>
-           </e-column>
-            <e-column field='QuantityPerUnit' headerText='Time' width=150></e-column> 
-            <e-column field='CategoryName' headerText='Task Name' width=150></e-column>
-            <e-column field='ProductName' headerText='Assign For' width=150></e-column>
-        </e-columns>
-    </ejs-grid>
+    [allowFiltering]="true"
+    gridLines="Both"
+    (actionBegin)="actionBegin($event)"
+    [allowSorting]="true"
+    [allowPaging]="true"
+    [editSettings]="editSettings">
+<e-columns>
+  <e-column headerText='Status' width='150' textAlign='Center' >
+    <ng-template #template let-data>
+      <div *ngIf="data.Status; else elseblock">
+        <input type="checkbox" checked (change)="onChangeStatus($event)">
+      </div>
+    </ng-template>
+    <ng-template #elseblock>
+      <input type="checkbox">
+    </ng-template>
+    <ng-template #editTemplate></ng-template>
+  </e-column>
+  <e-column field='TaskName' headerText='Task Name' width=150></e-column> 
+  <e-column field='Due' headerText='Due' width=150></e-column>
+</e-columns>
+</ejs-grid>
+
   </div>
   <div class="row mt-5">
     <div class="col-xl-12 mb-5 mb-xl-0"></div>

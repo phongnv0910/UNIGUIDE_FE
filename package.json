@@ -34,6 +34,7 @@
     "@syncfusion/ej2-angular-inputs": "^25.2.3",
     "@syncfusion/ej2-angular-notifications": "^25.2.3",
     "@syncfusion/ej2-angular-popups": "^25.2.4",
+    "@syncfusion/ej2-angular-richtexteditor": "^25.2.5",
     "@syncfusion/ej2-popups": "^25.2.4",
     "bootstrap": "4.6.1",
     "chart.js": "2.9.4",

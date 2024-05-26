@@ -1,133 +1,78 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { EditSettingsModel, ToolbarItems } from '@syncfusion/ej2-angular-grids';
+import * as signalR from "@microsoft/signalr";
 
 @Component({
   selector: 'app-normal-form',
   templateUrl: './normal-form.component.html',
   styleUrls: ['./normal-form.component.scss']
 })
-
 export class NormalFormComponent implements OnInit {
-  public toolbarOptions: ToolbarItems[];
-  
+  public toolbarOptions: ToolbarItems[] = ["Add", "Edit", "Delete", "Update", "Cancel"];
+  private fileId = this.route.snapshot.paramMap.get("formId");
   public editSettings?: EditSettingsModel = {
     allowEditing: true,
     allowAdding: true,
     allowDeleting: true,
-    //template: false,
-     mode: 'Dialog',
+    mode: 'Dialog',
   };
-  categoryData: Object[] = [
-    {
-      
-        "CategoryName": "Do task 1",
-        'ProductID': 1,
-        'ProductName': 'Quang Ha',
-        'SupplierID': 1,
-        'QuantityPerUnit': '30/10/2024',
-        // 'UnitPrice': 18.00,
-        // 'UnitsInStock': 39,
-        'Discontinued': true
-    },
+  
+  public originalData: any[] = []; // Store original data
+  public data: any[] = []; // Store current data
 
-    {
-      
-      "CategoryName": "Do task 2",
-      'ProductID': 1,
-      'ProductName': 'Quang Lap',
-      'SupplierID': 1,
-      'QuantityPerUnit': '30/10/2024',
-      // 'UnitPrice': 18.00,
-      // 'UnitsInStock': 39,
-      'Discontinued': true
-  },
-  {
-      
-    "CategoryName": "Do task 3",
-    'ProductID': 1,
-    'ProductName': 'Da Hue',
-    'SupplierID': 1,
-    'QuantityPerUnit': '30/10/2024',
-    // 'UnitPrice': 18.00,
-    // 'UnitsInStock': 39,
-    'Discontinued': true
-},
+  private connection: signalR.HubConnection;
 
-{
-      
-  "CategoryName": "Do task 4",
-  'ProductID': 1,
-  'ProductName': 'Tuan Vu',
-  'SupplierID': 1,
-  'QuantityPerUnit': '30/10/2024',
-  // 'UnitPrice': 18.00,
-  // 'UnitsInStock': 39,
-  'Discontinued': true
-},
+  constructor(private route: ActivatedRoute) {
+    this.connection = new signalR.HubConnectionBuilder()
+      .withUrl("https://localhost:7144/chathub")
+      .build();
+  }
 
-{
-      
-  "CategoryName": "Do task 5",
-  'ProductID': 1,
-  'ProductName': 'Dam Vinh Hung',
-  'SupplierID': 1,
-  'QuantityPerUnit': '30/10/2024',
-  // 'UnitPrice': 18.00,
-  // 'UnitsInStock': 39,
-  'Discontinued': true
-},
-{
-      
-  "CategoryName": "Do task 1",
-  'ProductID': 1,
-  'ProductName': 'Quang Le',
-  'SupplierID': 1,
-  'QuantityPerUnit': '30/10/2024',
-  // 'UnitPrice': 18.00,
-  // 'UnitsInStock': 39,
-  'Discontinued': true
-},
+  ngOnInit() {
+    console.log("id", this.fileId);
+    if (this.fileId) {
+      var id = this.fileId + " ";
+      console.log("id", this.connection);
 
-{
-      
-  "CategoryName": "Do task 1",
-  'ProductID': 1,
-  'ProductName': 'Truong my lan',
-  'SupplierID': 1,
-  'QuantityPerUnit': '30/10/2024',
-  // 'UnitPrice': 18.00,
-  // 'UnitsInStock': 39,
-  'Discontinued': true
-},
+      this.connection.start()
+        .then(() => {
+          console.log("connected");
+          return this.connection.invoke("AddToGroup", id, "todolist");
+        })
+        .catch((err) => {
+          return console.error(err.toString());
+        });
 
-{
-      
-  "CategoryName": "Do task 1",
-  'ProductID': 1,
-  'ProductName': 'Bui Xuan Huan',
-  'SupplierID': 1,
-  'QuantityPerUnit': '30/10/2024',
-  // 'UnitPrice': 18.00,
-  // 'UnitsInStock': 39,
-  'Discontinued': true
-},
+      // Use arrow function here to preserve the scope of 'this'
+      this.connection.on("ReceiveMessage", (message) => {
+        console.log("message", message);
+        this.originalData = JSON.parse(message); // Store original data
+        this.data = [...this.originalData]; // Set current data
+        console.log("data", this.data);
+      });
+    }
+  }
 
-{
-      
-  "CategoryName": "Do task 1",
-  'ProductID': 1,
-  'ProductName': 'Qua Te',
-  'SupplierID': 1,
-  'QuantityPerUnit': '30/10/2024',
-  // 'UnitPrice': 18.00,
-  // 'UnitsInStock': 39,
-  'Discontinued': true
-},];
-    
-  public data?: object[];
+  actionBegin(args: any) {
+    console.log("logging", args);
+    if (args.requestType === "save" && args.action === "edit") {
+      const editedItem = args.data;
+      const originalItemIndex = this.originalData.findIndex(item => item.TaskName === editedItem.TaskName);
+      if (originalItemIndex !== -1) {
+        this.originalData[originalItemIndex] = editedItem;
+        console.log('Updated original data:', this.originalData);
+      }
+      const jsonString = JSON.stringify(editedItem, null, 2);
+      console.log('JSON String:', jsonString);
 
-  ngOnInit(): void {
-    this.toolbarOptions = ['Add', 'Edit', 'Delete'];
-      this.data = this.categoryData;
+      this.connection
+        .invoke("SendMessage", "todolist", jsonString)
+        .catch(err => console.error('err sending : ' + err));
+    }
+  }
+
+  onChangeStatus(value: any) {
+    console.log("value", value);
   }
 }
