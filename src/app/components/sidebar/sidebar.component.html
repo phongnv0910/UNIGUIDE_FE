@@ -41,15 +41,17 @@
               <li class="{{menuItem.class}} nav-item" *ngIf="menuItem.parentid === 2">
                 <div class="menu-item-wrapper">
                   <a routerLinkActive="active" class="nav-link" style="display: contents;" (click)="toggleSubMenuExpansions(menuItem)">
-                    <span class="icon-wrapper">
+                    <span class="icon-wrapper" *ngIf="!menuItem.isChildExpand">
                       <i class="ni" [ngClass]="{'ni-bold-down': menuItem.isExpanded, 'ni-bold-right': !menuItem.isExpanded}"style="margin-right: 10px"></i>
                     </span>
                     <span style="margin-left:5px" class="fs-10">
-                      <i class="ni {{menuItem.icon}}" style="margin-right: 5px;"></i>  <span class="formf text-green"> {{menuItem.title}}</span>
+                      <i class="ni {{menuItem.icon}}" style="margin-right: 5px;"></i>  <span class="formf text-green"> 
+                        {{menuItem.title}}
+                      </span>
                     </span>
                   
                   </a>
-                  <i class="ni ni-fat-add" (click)="onOpenDialogFile($event,menuItem.objectId)" style="margin-left: 10px;"></i>
+                  <i *ngIf="!menuItem.isChildExpand" class="ni ni-fat-add" (click)="onOpenDialogFile($event,menuItem.objectId)" style="margin-left: 10px;"></i>
                 </div>
                 <ul *ngIf="menuItem.isExpanded" style="margin-top: 15px;">
                   <ng-container *ngFor="let submenuItem of menuItem.file">

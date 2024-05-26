@@ -45,7 +45,7 @@
             <div class="form-group mb-3">
               <div class="input-group input-group-alternative">
                  
-                  <input class="form-control formz" placeholder="First Name" type="text">
+                  <input class="form-control formz" placeholder="First Name" type="text" (change)="onFirstNameChange($event)">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="ni ni-single-02"></i></span>
                 </div>
@@ -55,7 +55,7 @@
             <div class="input-group input-group-alternative">
                 
                 <!-- <ejs-textbox placeholder="Last Name" floatLabelType="Never" cssClass="e-outline" class=></ejs-textbox> -->
-                <input class="form-control formz" placeholder="Last Name" type="text">
+                <input class="form-control formz" placeholder="Last Name" type="text" (change)="onLastNameChange($event)">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-badge"></i></span>
               </div>
@@ -92,7 +92,7 @@
             <div class="form-group mb-3">
                 <div class="input-group input-group-alternative">
                     
-                    <input class="form-control formz" placeholder="Email" type="email">
+                    <input class="form-control formz" placeholder="Email" type="email" (change)="onEmailChange($event)">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                   </div>
@@ -110,17 +110,17 @@
             <div class="form-group mb-3">
               <div class="input-group input-group-alternative">
                  
-                  <input class="form-control formz" placeholder="Re-Password" type="password">
+                  <input class="form-control formz" placeholder="Re-Password" type="password" (change)="onRepassChange($event)">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                 </div>
               </div>
           </div>
-          <!-- <div class="form-group mb-3">
+         - <div class="form-group mb-3">
             <div class="">
-                <p class="bg-danger formz" *ngIf="!checkPass">Your re-password is incorrect</p>
+                <p class="bg-danger formz" *ngIf="checkPass">Your re-password is incorrect</p>
             </div>
-        </div> -->
+        </div> 
             <div class="custom-control custom-control-alternative custom-checkbox">
                 <input class="custom-control-input" id="customCheckLogin" type="checkbox">
                 <label class="custom-control-label" for="customCheckLogin">
@@ -132,7 +132,7 @@
               </p>
             </div>
             <div class="text-center">
-                <button type="submit" class="btn btn-primary my-4 formz form-control">Register</button>
+                <button type="submit" class="btn btn-primary my-4 formz form-control" (click)="onSubmit()">Register</button>
             </div>
         </form>
 
@@ -143,3 +143,12 @@
     </div>
   </div>
 </div>
+
+<ejs-toast #element (created)="onCreate($event)" [position]='position'>
+  <ng-template #title>
+      <div>{{header}}</div>
+  </ng-template>
+  <ng-template #content>
+      <div>{{titlee}}</div>
+  </ng-template>
+</ejs-toast>

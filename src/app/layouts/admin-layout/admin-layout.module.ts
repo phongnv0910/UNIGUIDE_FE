@@ -15,6 +15,8 @@ import { NotificationsComponent } from 'src/app/pages/notifications/notification
 import { FormViproComponent } from 'src/app/pages/form-vipro/form-vipro.component';
 import { ClubComponent } from 'src/app/pages/club/club.component';
 import { DialogModule } from '@syncfusion/ej2-angular-popups';
+import { TextBoxAllModule } from '@syncfusion/ej2-angular-inputs';
+import { DatePickerAllModule } from '@syncfusion/ej2-angular-calendars';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -26,7 +28,9 @@ import { DialogModule } from '@syncfusion/ej2-angular-popups';
     NgbModule,
     DialogModule,
     ClipboardModule,
-    GridAllModule
+    GridAllModule,
+    TextBoxAllModule,
+    DatePickerAllModule
   ],
   declarations: [
     DashboardComponent,

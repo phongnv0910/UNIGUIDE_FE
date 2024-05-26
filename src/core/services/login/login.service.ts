@@ -17,6 +17,9 @@ export class LoginService extends ApiService{
    login(formData: any): Observable<any> {
     let url = '/Account/Auth';
     return super.postEntity(url, formData).pipe()
- 
+  }
+  register(formData: any): Observable<any> {
+    let url = '/Account/Register';
+    return super.postEntity(url, formData).pipe()
   }
 }

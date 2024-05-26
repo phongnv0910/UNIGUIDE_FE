@@ -16,29 +16,53 @@
   <div class="row"></div>
   <div class="card-body">
     <ejs-grid [dataSource]='data' [toolbar]="toolbarOptions"
-    [allowFiltering]="true"
-    gridLines="Both"
-    (actionBegin)="actionBegin($event)"
-    [allowSorting]="true"
-    [allowPaging]="true"
-    [editSettings]="editSettings">
-<e-columns>
-  <e-column headerText='Status' width='150' textAlign='Center' >
-    <ng-template #template let-data>
-      <div *ngIf="data.Status; else elseblock">
-        <input type="checkbox" checked (change)="onChangeStatus($event)">
-      </div>
-    </ng-template>
-    <ng-template #elseblock>
-      <input type="checkbox">
-    </ng-template>
-    <ng-template #editTemplate></ng-template>
-  </e-column>
-  <e-column field='TaskName' headerText='Task Name' width=150></e-column> 
-  <e-column field='Due' headerText='Due' width=150></e-column>
-</e-columns>
-</ejs-grid>
-
+      [allowFiltering]="true"
+      gridLines="Both"
+      [allowSorting]="true"
+      [allowPaging]="true"
+      [editSettings]="editSettings">
+        <e-columns>
+            <e-column headerText='status' width='150' textAlign='Center'>
+              <ng-template #template let-data>
+                <div *ngIf="data.Discontinued; else elseblock">
+                     <input type="checkbox" checked>
+                </div>
+              </ng-template>
+              <ng-template #elseblock><input type="checkbox"></ng-template>
+              <ng-template #editTemplate let-data>
+                <ejs-checkbox
+                  [checked]="data.Discontinued"
+                  (change)="onChangeStatus($event)">
+                </ejs-checkbox>
+              </ng-template>
+           </e-column>
+           <e-column field="TaskName" headerText="Task Name" width="150">
+            <ng-template #editTemplate let-data>
+            <ejs-textbox
+              [value]="data.taskName"
+              floatLabelType='Auto' 
+              placeholder="Task Name"
+              (change)="onChangeTask($event)">
+            </ejs-textbox>
+            </ng-template>
+          </e-column> 
+          
+          <e-column field="Due" headerText="Due" format="dd/MM/yyyy" width="150">
+            <ng-template #template let-data>
+              {{ data.due | date : "dd/MM/yyyy" }}
+            </ng-template>
+           <ng-template #editTemplate let-data>
+            <ejs-datepicker
+              [value]="data.due"
+              floatLabelType='Auto'
+              (change)="onChangeDue($event)"
+              placeholder="Due Time">
+              
+            </ejs-datepicker>
+           </ng-template>
+          </e-column>
+        </e-columns>
+    </ejs-grid>
   </div>
   <div class="row mt-5">
     <div class="col-xl-12 mb-5 mb-xl-0"></div>
