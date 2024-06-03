@@ -1,7 +1,7 @@
 
 <div *ngIf="!checkToken" style="margin-top:25px; margin-left: 20px;">
   <a class="navbar-brand pt-0" routerLinkActive="active" [routerLink]="['/dashboard']" style="display: flex; align-items: center;">
-    <img src="./assets/img/theme/notion.jpg" class="navbar-brand-img" alt="..." style="max-height: 40px; margin-right: 0px;">
+    <img src="./assets/img/logoReal.png" class="navbar-brand-img" alt="..." style="max-height: 40px; margin-right: 0px;">
     <p class="wordmark_fill__RZFeq" style="margin: 0; font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 600; color: #333;">UNI GUIDE</p>
 </a>
 
@@ -16,7 +16,7 @@
     <!-- Brand -->
     <div>
       <a class="navbar-brand pt-0" routerLinkActive="active" [routerLink]="['/dashboard']" style="display: flex; align-items: center;">
-        <img src="./assets/img/theme/notion.jpg" class="navbar-brand-img" alt="..." style="max-height: 40px; margin-right: 0px;">
+        <img src="./assets/img/logoReal.png" class="navbar-brand-img" alt="..." style="max-height: 40px; margin-right: 0px;">
         <p class="wordmark_fill__RZFeq" style="margin: 0; font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 600; color: #333;">UNI GUIDE</p>
     </a>
     
@@ -48,8 +48,19 @@
             <ng-container *ngFor="let menuItem of menuItems">
               <li class="{{menuItem.class}} nav-item" *ngIf="menuItem.parentid === 2">
                 <div class="menu-item-wrapper">
-                  <a routerLinkActive="active" class="nav-link" style="display: contents;" (click)="toggleSubMenuExpansions(menuItem)">
-                    <span class="icon-wrapper" *ngIf="!menuItem.isChildExpand">
+                  <a routerLinkActive="active"  *ngIf="!menuItem.isChildExpand" class="nav-link" style="display: contents;" (click)="toggleSubMenuExpansions(menuItem)">
+                    <span class="icon-wrapper">
+                      <i class="ni" [ngClass]="{'ni-bold-down': menuItem.isExpanded, 'ni-bold-right': !menuItem.isExpanded}"style="margin-right: 10px"></i>
+                    </span>
+                    <span style="margin-left:5px" class="fs-10">
+                      <i class="ni {{menuItem.icon}}" style="margin-right: 5px;"></i>  <span class="formf text-green"> 
+                        {{menuItem.title}}
+                      </span>
+                    </span>
+                  
+                  </a>
+                  <a routerLinkActive="active"  *ngIf="menuItem.isChildExpand" href="/form-vipro" class="nav-link" style="display: contents;" (click)="toggleSubMenuExpansions(menuItem)">
+                    <span class="icon-wrapper">
                       <i class="ni" [ngClass]="{'ni-bold-down': menuItem.isExpanded, 'ni-bold-right': !menuItem.isExpanded}"style="margin-right: 10px"></i>
                     </span>
                     <span style="margin-left:5px" class="fs-10">
@@ -127,6 +138,7 @@
     </div>
 
     <div class="e-section-control">
+      <!-- Radio buttons -->
       <ul style="display: flex;">
         <li>
           <ejs-radiobutton label="Simple Note" (change)="onSelectedChange($event)" value="SIMPLE" name="default"></ejs-radiobutton>
@@ -136,12 +148,16 @@
         </li>
       </ul>
     </div>
+    
+    <!-- Container for images -->
     <div class="e-section-control">
-      <ul style="display: flex;">
-        <li><img class="img20" src="assets/background/temp3.jpg" /></li>
-        <li><img class="img20" src="assets/background/temp4.png" /></li>
+      <ul style="display: flex; justify-content: space-between;">
+        <li style="flex: 1;"><img src="assets/background/temp3.jpg" style=" width: 165%;margin-left: -40px;" /></li>
+        <li style="flex: 1; margin-left: 20px;"><img src="assets/background/temp5.jpg" style="height:285px;margin-left: 10px;"/></li>
       </ul>
     </div>
+    
+  
     <p *ngIf="checkRequiredRadio" style="color:red">You need to choose an option</p>
     <p *ngIf="checkNameFile" style="color:red">You need to input a file name</p>
     <div class="button-container">

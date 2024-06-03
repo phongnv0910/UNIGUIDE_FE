@@ -22,11 +22,12 @@ declare interface RouteInfo {
   isExpanded?: boolean;
   isChildExpand?: boolean;
   file?: Array<any>;
+  idCheck? : number;
 }
 
 export const ROUTES: RouteInfo[] = [
   { id: 2, objectType: ObjectType.folder, path: '/note', title: 'Note', icon: 'ni-tv-2 text-primary', class: 'formz', hasSubmenu: true, parentid: null },
-  { id: 3, path: '/form-vipro', title: 'Semester 1', icon: 'ni-tv-2 text-primary', class: 'formz', hasSubmenu: false, parentid: 2, isExpanded : true , isChildExpand : true },
+  { id: 3, path: '/form-vipro', title: 'Semester 1', icon: 'ni-bullet-list-67', class: 'formz', hasSubmenu: false, parentid: 2, isExpanded : true , isChildExpand : true,idCheck: 1 },
   { id: 4, path: '/maps', title: 'Accomodation', icon: 'ni-pin-3 text-orange', class: 'formz', hasSubmenu: false, parentid: null },
   { id: 5, path: '', title: 'Restaurant', icon: 'ni-single-02 text-yellow', class: 'formz', hasSubmenu: false, parentid: null },
 ];

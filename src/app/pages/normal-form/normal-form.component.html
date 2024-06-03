@@ -15,30 +15,26 @@
 <div class="container-fluid mt--7">
   <div class="row"></div>
   <div class="card-body">
-    <ejs-grid [dataSource]='data' [toolbar]="toolbarOptions"
-      [allowFiltering]="true"
+    <ejs-grid [dataSource]='datas' [toolbar]="toolbarOptions"
       gridLines="Both"
       [allowSorting]="true"
       [allowPaging]="true"
+      height="400px"
+      (actionBegin)="actionBegin($event)"
       [editSettings]="editSettings">
         <e-columns>
-            <e-column headerText='status' width='150' textAlign='Center'>
-              <ng-template #template let-data>
-                <div *ngIf="data.Discontinued; else elseblock">
-                     <input type="checkbox" checked>
-                </div>
-              </ng-template>
-              <ng-template #elseblock><input type="checkbox"></ng-template>
-              <ng-template #editTemplate let-data>
-                <ejs-checkbox
-                  [checked]="data.Discontinued"
-                  (change)="onChangeStatus($event)">
-                </ejs-checkbox>
-              </ng-template>
-           </e-column>
-           <e-column field="TaskName" headerText="Task Name" width="150">
+          <e-column field='status' headerText='Status' width='40px' textAlign='Center'>
+            <ng-template #template let-data>
+              <input type="checkbox" [checked]="data.Discontinued" disabled> 
+            </ng-template>
             <ng-template #editTemplate let-data>
-            <ejs-textbox
+              <input type="checkbox" [checked]="data.Discontinued" 
+                     (change)="onChangeStatus($event, data)">
+            </ng-template>
+          </e-column>
+           <e-column field="TaskName" headerText="Task Name" width="150" headerTextAlign="Center" textAlign="Center">
+            <ng-template #editTemplate let-data> 
+           <ejs-textbox
               [value]="data.taskName"
               floatLabelType='Auto' 
               placeholder="Task Name"
@@ -47,19 +43,15 @@
             </ng-template>
           </e-column> 
           
-          <e-column field="Due" headerText="Due" format="dd/MM/yyyy" width="150">
-            <ng-template #template let-data>
+          <e-column field="Due" headerText="Due" format="dd/MM/yyyy" width="150" headerTextAlign="Center" textAlign="Center">
+           <ng-template #template let-data>
               {{ data.due | date : "dd/MM/yyyy" }}
+            </ng-template> 
+            <ng-template #editTemplate let-data>
+              <ejs-datepicker format="dd/MM/yyyy" [(ngModel)]="data.due" (change)="onChangeDue($event)">
+
+              </ejs-datepicker>
             </ng-template>
-           <ng-template #editTemplate let-data>
-            <ejs-datepicker
-              [value]="data.due"
-              floatLabelType='Auto'
-              (change)="onChangeDue($event)"
-              placeholder="Due Time">
-              
-            </ejs-datepicker>
-           </ng-template>
           </e-column>
         </e-columns>
     </ejs-grid>

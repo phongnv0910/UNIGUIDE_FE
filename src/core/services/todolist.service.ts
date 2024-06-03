@@ -44,5 +44,11 @@ updateDo(formData: any): Observable<Responses> {
       })
   );
 }
-
+DeleteToDoList(id: any): Observable<Object> {
+  return super.deleteEntity('/File/ToDoList', id).pipe(
+    catchError((err) => {
+      return throwError(() => err);
+    })
+  );
+}
 }

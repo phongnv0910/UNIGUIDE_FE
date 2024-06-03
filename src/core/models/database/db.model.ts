@@ -179,4 +179,7 @@ export class Folder {
     @JsonProperty('File', File, true)
     File: File = undefined as any;
 }
-
+// @JsonObject("detailToDoList")
+// export class detailToDoList {
+//     @JsonProperty 
+// }

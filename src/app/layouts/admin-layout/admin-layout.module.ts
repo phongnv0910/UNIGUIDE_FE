@@ -17,6 +17,8 @@ import { ClubComponent } from 'src/app/pages/club/club.component';
 import { DialogModule } from '@syncfusion/ej2-angular-popups';
 import { TextBoxAllModule } from '@syncfusion/ej2-angular-inputs';
 import { DatePickerAllModule } from '@syncfusion/ej2-angular-calendars';
+import { ToastrModule } from 'ngx-toastr';
+import { ToastAllModule } from '@syncfusion/ej2-angular-notifications';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -28,6 +30,7 @@ import { DatePickerAllModule } from '@syncfusion/ej2-angular-calendars';
     NgbModule,
     DialogModule,
     ClipboardModule,
+    ToastAllModule,
     GridAllModule,
     TextBoxAllModule,
     DatePickerAllModule

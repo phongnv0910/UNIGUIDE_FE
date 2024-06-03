@@ -103,8 +103,14 @@ export class RegisterComponent implements OnInit {
         this.header = "Successfully";
         this.titlee = "Your account has been created successfully";
         this.element.show();
-        window.location.href = '/dashboard';
-      })
+        window.location.href = '/hi/login';
+      });
+      this.header = "Successfully";
+      this.titlee = "Your account has been created successfully";
+      this.element.show();
+      setTimeout(() => {
+        window.location.href = '/hi/login';
+      }, 5000); 
     }
   
   }

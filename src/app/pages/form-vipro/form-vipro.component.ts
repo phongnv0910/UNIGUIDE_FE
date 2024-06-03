@@ -19,9 +19,9 @@ export class FormViproComponent implements OnInit {
   categoryData: Object[] = [
     {
       
-        "CategoryName": "10",
-        'ProductID': 9,
-        'ProductName': '6',
+        "CategoryName": "0",
+        'ProductID': 0,
+        'ProductName': '0',
         'SupplierID': 1,
         'QuantityPerUnit': '30/10/2024',
         // 'UnitPrice': 18.00,

@@ -64,8 +64,17 @@
           
         </div>
         <div class="button-container">
-          <button id="sendButton1" class="e-control e-btn e-secondary sendButton formf" data-ripple="true" (click)="close()">Save</button>
+          <button id="sendButton1" class="e-control e-btn e-secondary sendButton formf" data-ripple="true" (click)="onsubmit()">Save</button>
           <button style="margin-left: 20px;" id="sendButton2" class="e-control e-btn e-primary sendButton formf" data-ripple="true" (click)="close()">Cancel</button>
         </div>
     </ng-template>
 </ejs-dialog>
+
+<ejs-toast #element (created)="onCreate($event)" [position]='position'>
+    <ng-template #title>
+        <div>{{header}}</div>
+    </ng-template>
+    <ng-template #content>
+        <div>{{titlee}}</div>
+    </ng-template>
+  </ejs-toast>
