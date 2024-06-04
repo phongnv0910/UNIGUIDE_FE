@@ -26,7 +26,7 @@ export class NoteComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute
   ) {
     this.connection = new signalR.HubConnectionBuilder()
-      .withUrl("https://localhost:7144/chathub")
+      .withUrl("https://studentguidebe.azurewebsites.net/chathub")
       .build();
   }
 
