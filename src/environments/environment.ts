@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://studentguidebe.azurewebsites.net/api'
+  apiUrl: 'https://localhost:7144/api'
 };
 
 /*
